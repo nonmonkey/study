@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>给所有无子节点元素(可以包含文本、注释节点)添加样式</title>
+    <style>
+      .parent {
+        height: 100px;
+        background-color: aquamarine;
+        margin-bottom: 10px;
+      }
+
+      .child {
+        height: 40px;
+        border: 1px solid blue;
+      }
+
+      /* 空标签 */
+      .empty {
+        background-color: #f40;
+        border: 5px solid black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="parent"></div>
+
+    <div class="parent">
+      <div class="child"></div>
+    </div>
+
+    <div class="parent">
+      <div class="child">
+        <span>上不去黄金的谢军</span>
+        <span></span>
+      </div>
+    </div>
+
+    <script>
+      const b = document.querySelector("body");
+      const targetClass = "empty";
+      const whiteList = ["body", "script"];
+      const ignoredTag = whiteList.map(item => item.toLocaleUpperCase());
+
+      // 添加class
+      function addClass(ele, cls) {
+        if (!ignoredTag.includes(ele.tagName)) {
+          if (ele.className) {
+            ele.className += " " + cls;
+          } else {
+            ele.className = cls;
+          }
+        }
+      }
+
+      function main(ele) {
+        if (ele.childNodes.length === 0) {
+          addClass(ele, targetClass);
+        } else {
+          const eleChildNodes = [];
+          ele.childNodes.forEach(i => {
+            // https://www.w3school.com.cn/jsref/prop_node_nodetype.asp
+            // Node.ELEMENT_NODE
+            // Node.TEXT_NODE
+            // Node.COMMENT_NODE
+            if (i.nodeType === Node.ELEMENT_NODE) {
+              eleChildNodes.push(i);
+            }
+          });
+
+          if (eleChildNodes.length === 0) {
+            addClass(ele, targetClass);
+          } else {
+            for (let e of eleChildNodes) {
+              main(e);
+            }
+          }
+        }
+      }
+
+      main(b);
+    </script>
+  </body>
+</html>

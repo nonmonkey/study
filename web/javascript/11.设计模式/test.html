@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      img {
+        width: 200px;
+        height: 200px;
+        font-size: 200px;
+        line-height: 200px;
+        color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <button tag="login" id="button">点击打开登录浮层</button>
+    <script>
+      Function.prototype.after = function (afterfn) {
+        var __self = this;
+        return function () {
+          var ret = __self.apply(this, arguments);
+          afterfn.apply(this, arguments);
+          return ret;
+        };
+      };
+      window.onload = (window.onload || function () {}).after(function () {
+        console.log(document.getElementsByTagName('*').length);
+      });
+    </script>
+  </body>
+</html>

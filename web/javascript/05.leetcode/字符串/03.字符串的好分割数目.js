@@ -1,0 +1,112 @@
+/**
+给你一个字符串 s ，一个分割被称为 「好分割」 当它满足：将 s 分割成 2 个字符串 p 和 q ，它们连接起来等于 s 且 p 和 q 中不同字符的数目相同。
+请你返回 s 中好分割的数目。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/number-of-good-ways-to-split-a-string
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ */
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var numSplits = function (s) {
+  var l = s.length;
+  var i;
+  var result = 0;
+  var left = new Count();
+  var right = new Count();
+
+  for (i = 0; i < l; i++) {
+    right.add(s[i]);
+  }
+
+  for (i = 0; i < l; i++) {
+    left.add(s[i]);
+    right.remove(s[i]);
+
+    if (left.num === right.num) result++;
+    else if (left.num > right.num) return result;
+  }
+  return result;
+};
+
+var Count = function () {
+  this.num = 0; // 记录字符种类的数量
+  this.container = {}; // 记录每种字符的数量
+};
+Count.prototype.add = function (letter) {
+  if (!this.container[letter]) {
+    this.container[letter] = 1;
+    this.num++;
+  } else {
+    this.container[letter]++;
+  }
+};
+Count.prototype.remove = function (letter) {
+  if (this.container[letter] && --this.container[letter] === 0) {
+    this.num--;
+  }
+};
+
+console.log(numSplits('aacaba'));
+console.log(numSplits('abcd'));
+console.log(numSplits('aaaaa'));
+console.log(numSplits('acbadbaada'));
+console.log(
+  numSplits(
+    'feggbadfedggfgfbaccbcgbcfffecgdebcccedbeeeebagdbfbccdbddaccdbafbacgfeeecgdcgbceddfbgefecdcaefccbgfcegfaaegcefagadbfbebgadbbadaaeaafdaacbfacefcabdgfaeecbfdgaadaegababgfecgabcbgdbefgdddebbbbbeeceefaecdegacgfgeegbcdcfbaaaedafdgfbdggddfdgadgcebfefcfgdeabcebebffbageacbgfdagbefcbceeeeegdcddbbacccafdcfbfffdbbebgdfceebeaadccfcfaabaecfadbebebgggeddebbcbffgcddafgdfaeccceafcbegdgcgfcedaaggdfedbfeffcgeafdgfccaeeccdeabdbecbaefcacfegbfaaefdbdfebgbefgeecgfebbdacddagabefbabdfbfccafbgfcbedafedgafgbefbadfggfdeacddfebbffeabcbfgacacfccbceagcabfcagcgdfadgbfdfeeffbefbfecbgaefddgfgeabagcefdbcbccceddggcdfaaggfabgccafbeeabdbgaadfbdeeccddcdebdecfbggcbaafgeeffbcfeabccbbegfecgfdcfcdedbegegbafgcecbbgcegeddebcgdegegffefgggccggccaegaffabgfbcgafgeddaccedbddggfgeefcbbfccegaefadaacfgdgffafbcaaefgadgfeaabfgcgddabgfbabccefgdbbfefdbccbgecedafceadaagfffgccafbbadaafagbeaebdccgbcffaccfagcefdbdfgbdagbdfdgacceebfabeccaadcfbdgdgddddccdaeeabdadebgadfffabcdfcceccdgbedgaeabcgfaddfbegbfgfgbdeceeebgdcdaaabcbbbdfgabgbgbdaffaedcbgcgfbfdbfadfbbeecdfebaadffbcecbdfgegggaeagbdfceeefgfdfcgebeegcfcfacedffdedggafgbgcfdaefeaggadffgcaadbgbdaccdbcfacacfdbaefefabfbbgffddefcbbfadafagebbgcadaefgegfbgafbcfbcdcebebbaddgaebbbabcbeegecbcggaabeecgcedcgfbbfegfceeadagdggfeeecccceggabebcfaaabeccgdgaagagccedgaaaacaccddfccbddddeebeeaccebcedgdefgccabfgbecafefcaafafbfffbbffbcagbfecdceedecebgcbgbfdddbabebgdbfcgcgbaabfbebafacfbfcacdcfaffdabgfabaddfecccgbfcaddgbbeaafggcbdfabagfbaeaafebgbgbeaefgbbeffgggegeeeedbgaebegcbdbeedaabdgdegacfdfeeccaeebbebecddddccaegbdcbegdbadccccefeeeceeafcebebbbabdceddbdgcaaaefgbggcaggcbddecfdgbdfedgcgfgfcbeebcbdcdeaffcbffbafdagecdcbgcefcbagafdcdegcdeaabcafabbbbbeccgbfeagbdgfbcfcbfbbaaegdcecbgdeeaaaddbagbeagccbaaddffadeeafcedcgaccdbfdfbbfffabgeacegbefefbdbfcbabcecbdbdbdecbcbcbeccabcbfbafcgbfbefacfbedfecfgdacgdgceaebgadfeeaccgfcceabbfdaaeagbfadecfafagaaecccbacedgdffcbgebeabaabgeccecaacgaefgcgffbedaabbbaabeadbbfaagcgdfgcageffdegegfcabddddgaafbgaafgacgdecggbcdfcfccfccfeggdgadcebdbdbffcfcgefadcdafaceddbegabafaabbgffeddbdccefgadfgfddeeafbgfbddggbccdddfbcffdadedbfaeeaffgfgcdebaaafdegfefaaedbbageggaecaaadfgbeaeceabaebdefgdcgfcbcgbaceggccefgaggeccgbafgcaagabdaacfeeaacgbeabgfaecfggbddcaaeaffegdfdfbbfdbcgdfbbaaabedacbbbgfcdcagbgfedaedeffbbcadgagagbbeceafeffcgcefgfecffeggdecggeafbaedbebabbgadgaceacbbeeeegadefaebbgacgafbgfgagccccaacdgcdagagcbcddadbceadgaaebffdbdfeeeebdaedaedbggefaffgcbccaffbgdgaaacdgcbbdagfbccdadcfeecegdfbffbcfccggbbgddcgfcbgdgfcgcdgfcdgdabfcbeagdebgabgbgeggedgbacffcefefffcdceccaecffbgfdbedcddbafbefdfafebedbbfbfbfefacbeceggcfcafffcafddfcdeedcacgeaacddfabcdcadfbagbfadegbedbfbfaaecgcfgbddcgfggegcfcefdgefdeddaeaddagacefbfbdeebeggabebafbggafdaddbcfbggabcdaabcfbbdbfeagacaabddcfcffcegaabbaffbfbbcbbggcecdfggdcdbcfdefcgccaedcdgceaeccfcbfaddggdbgbgffdfcdgdbeecffbddeggecgfdfgcfebcdabedgbaegbfccceegcbddbeabeeaedddeaegcbeecgbaedaegfeddfccegacdffbfefcabcdcgdcbfeebddfdbgdgabccfbbecdfddbeceecedfabbebccbddggdcedbfedeeebgafeagddefebgbcbccfcgfdaaafbbggdeaabedgdebedacffeafeabgbadafaeeaddfgcdefcaccacffecefgeddcbebcbfcdcfffecbffagcgdaeadbbfadcbgfdefefaagcdgacfbaffcdgaffcacbfeebebafgagdgfeecafbcfbedbdabaggcbegccbadaeefegbabgddccbagceeafcgcaebdddgbgcadeaccgdeeddgdbeagddgbdgbgfcggfbebbcddcagecfgegdacecdeedffebafgagfgffebbebffabgegcagggacdddcfgdabdfefeggeefaeeccaegddbbefedfdegfcgfbbefgcffbdgcfdaddaefafbceedefgffcaacbeadfggacaecacdabadcbcccfagagdbafgadadffadbcfffacabadeeeecaedgfaecfbaebdcddfbeegdfabfbddacefcegafgaefgaebgceddabdcagbacfbeffdebafacdffdgcdffedeaagfcdegdffadacdbeffefffbcabgfaagaeedecdgffgdcccdfbdcfbgccbfaefdcafagcafgfbgcgbfdcgcbfaabbfgbffbfeggcbcefdbebcggefafefaedcbeedgeccafbeagffaebecadeebfbfbebdcfdecgfgaaefebfbabdceecfeabecgegaadcdbebfbcdcegagedcccbbdbgddgeagaccafbgbgaaefcgecbfdgaeddcfgcecaegabcgedbfccefeaeecdacaccfdcfaaddebadbaeceegdgeafbggfgefcdbecebbbcgfaeccgdcegfbfcacfaeggadbfcfbedcfgggefffafecdcdefecdefegcfdgbcbefbagcfbebgdgfbgcbfaeagffdfbdcefecegabecfffagdaddcaaeeefgcbegcgcfdbdegfbdegfbdfdedbbddcafgbcddbdbdadagadfebfeaaceafdbggbfabebgbfdagcccggeeebedacddgegadcebaefeggbaagbacafgbfgabfgdeccbdfdbabfggdeadbcgeeacdddgedddfegbebegbadeffaecbfedfafddccfaeeagcffadfgaaeecbbaaddgfcggbbebdgebacegcbgebccafgacfeadfccgeegdgabecgagffedeadfbbebbcfcgfddebgebbbgbggagdabgacgeggaffeeegabgaggadfdfddcaabcgdadbdfbfbaedfebgeagccfgaaegcffcgfgedfcadabafaebbaeabbfbbeggfbebbgacbfdddcfagcadagdcegdaaacgcgccgbdeaggdcdbecffggfdeebcbffbdabdbaeebggbdbadgfabaafcedbdebgdbcecgacbcdddcgfeedabfbcgdgccfabfgdbcdgcadcdcaeebeeebecegcddbggefbcagebdcdbbbfcbgdcgggecdceabaebecbdceefabbcgfcfecdabfecgbfbfegfdadggcgagdggababdaedabecbebafbccadfdgbgcfbabbffeabgacgcbgbbcfdcfagfefegeeaeaffafcfccebfeadcaeeggacgbddefcfcfecgegbbfdfabgbfegbebcfgfefeaddgdbaffdababfgbcbfbfbegdfacgbfcbfaaaaabaegeeaafbbebfafcbgffccfebcgffgaeecdfebdfdafbfdadcagbbbagcdfedfecfbdgbbeedcfdfaacbdgcagbbaccfabbdbbedfgdgbdgddagbedgafddedgfcdfacdbccbbcbacbabafgbbgbcegegdagabfdfgbbgcaefbdbdgaadaafebegaggafadfefbdcadcddaecdaeeffbddfgeaabcegcecbaceeafdcgcdceccccddecgeddcebggcbbfebgafbbaacgaefegfbegaagafgcbebacdabebfcbgfebeggddfdbdecgaabfegdgdbabdafebgaaaedfddbdgcbecagegdgfaabfgcabcccgebdgbffaceccgcgbgabgdbcgdefcdfaabdegbebfgbfebgedecgagefdeeeacfababbccbbcegcgcafeddeggegbbbgacebaegdeedcddgcdfeeedbbegecedaabagfagdbeeegdcegcdafgdgdgbcaebffgacdagdefeccgceegdccbebgfbcfcgbdacfgebbgedacgfbfdbcfgaadgcdgebeaefadgdfdcgbeecfdefccbdefeceaacceegeccafgfgecdbbdcbededgfadgbcbdbbfefbdcgcfafaecfedffcegdgfdbccagfacgfbfdcfabgbbfbfcbcgbbaefdfdbccgadegffeddegcddeecbcageebbgeagaedeadeecdaebbcadfbcaabeebgfbddaebgcebgecdfgcccbacgefadfcfadfbbcgffdbfbdadcddacbfabaecdbaeebgceabaadbbbcedebbbcgdgbdfbfbbcegbacgbbacacgagegbgdbdecbgcgdcdgegebfaaefefbadaeeabbegdcaecbcebbdfdefbdeadfeaaffcbggeabccaeedgffdebggedebbfddcecfafbffecedgbfgbgdgbggeebageffbbdddfcacddddedbdaadaagcecggbbfagfeefcecadbaeacgdbgbfbfaecdacccacbfffggceggcdbecfeebbfbgdbcbagdagfbbbcdbabgcbfadfdecddccacaeagcadcgabafeaafdeacdfgabdceeccedffcgcbdbcfcaafeceffbdacdgbafbgdfcaggfcaacbcdbbaabdgdbfgfdcbfcdfceebcggfbabfbeeafbdebfcbbagedgafbgaecggcccdbadeadbgbcbaddffafbeedcfgagecebbgffedbedafgbeegddabcgdddbcaffbafbadbgbecgaedgabcedbdadbfgbdedeggbecgdbeafcdgebddffbgdebbgddfegbcbddeadbecbbabcffcgcfdadfdddebcedfacdfbdfgcdcageddfbgffgbdcedebdbdcbefgccebgdbfdbaddffbfbbaefbfdbfbaegdgbcadafedadcggfcdebfbgbcedgaadabbcgefbecdcedbdcfbbfgegdefaecdcafgcdbbgdaecfegbgcdcagcaccbccegccgfddcbfcbdaecccaabddfceebgdadafbccdffebfdbfdggfgcbcbacbdadacccacdggdggcfgbddcfgabdebaebdedcagcbgdcgegedeagbdeeegafddgdabfgeeaffecaegfedcgcecaecgfdecbdafccadggbgdabffbcffcgcgdgedgfefdcdagfgacfbfcggcdgefcbfbbbddgeefacfcbdaddeceaebdfbaagccaaecaecdcgbabaaeaebeagabbdacagbffgedbbadfaffaabbeecgcffffaefdefcbegagdgfdfgedcffcbgcbadggffadefeacbbfccfcgebebgdggcbebdcfceafcgdbgaadggbbaffegdefccbaggceeabccdgfcaddgffagefcfeffeegagfgbaecefbfaaggcedaffeddbeegdaadbdfccbbbbedcgdgcebaegaefdacbdfefddfedbgddgbfccagffggefdagcfffdbdfaeadbcbfecfadaccfegfaecbbafdeafeeeccbdfcdabfgbbbabcgdegdbbgaegcafdabebfbegeacfdefbegecgbfeagdgccdaeddgbefafcafcbeadggcgfeaeafcgeadbfagadedfcdcgcagaffbcdggaagacfffgcfbfacgfddgfaaadbgaececbbfcbfaccbbgegbgadgfbcefbebdcfbaadaddgcccfgdcaddfgfaadabdagddafbceaaddfdeadgeeadeeecffcadbaaabcbcaaggeadacfcffabcdbddcgbddegccbdaedddeafebaegegedeaagaeceaaeggecgeadfbgfddgcagffeebbbeegdedadagbbefdefagceeabegdceeabfaagadfbadgfgccecgebbcabffabbdeabdaaddecfabebfcbcbgadgbbfegfdbcfdeabbddcaabfbgbfeaeaebaccbgebfdcdagcbbaecdafcaeccgcbegcdeebbbcbcfddcbgfbdbdbeadbdgcbadbcgcecddefdafaadbdcgggedaedebbegaggbgbbbgcbbddfdagfgcefafcbbbcddcdddeedgddbfgaecdaccafdfdceggaccgcccbgddbgefgagcbcbfbdcaeggcfafbfceaaffegceeeacacaacbfcegegfgbebcdfffcabdecaadbdfbafbdfcdaafddbfgfbaadbfccebcdfagdegffaagccfcacffbdcedddbcaffbgffggcgcfdcedgddbbffcgdbacfcbdbgffcdgbagfgagbfagfbcdggadeceecgabaaecfefgeafgfgbecefgfdeceeeegggabcabcggedfefbcegefdegaededbcedbfbbacfbgddgccbfefgdedegabcaffbfcbgafcbfebddabcdaedafbcabdagfadefebegdaecaeeedbedcbfeebeffgaabgafadffddgebedaaffccbcgeddbdbbgaabcffcgfdbgfdfddfafafdebgedceagfcdfeddfffecafcgecagfecfdeagdeafegfaafafcffffacffbecbdaababfgfeeceeedabcgfcedecbddbgagabeccgafebdcceebeabaefbgceeedfdcbgfbedegfebbceegffcfagfdadafffgbabdbcfbbbdedfecdedbacaecbgdefgeabfcedeaaceadfdaccgdegfaecgebeacebeefbgadcgdadacgffgggadgdgcbdgbadaacaaegebcedegebaedbgggbbadccdgeeacgadgabbacfdgdebcgabfddadafgafeffabbegeddeadafebdbagfcceagdecgbgefefefecafcggcccbgefgbcbgdbaggbab'
+  )
+);
+
+/**一般，可维护性不高
+var numSplits = function(s) {
+  var l = s.length;
+  var i;
+  var left = { num: 0 };
+  var right = { num: 0 };
+  var result = 0;
+
+  var _countObj = function(obj, letter, flag = true) {
+    var n = flag ? 1 : -1;
+    if (obj[letter]) {
+      obj[letter] += n;
+      if (!obj[letter]) obj.num--;
+    } else {
+      obj[letter] = n;
+      obj.num++;
+    }
+  }
+
+  for (i = 0; i < l; i++) {
+    _countObj(right, s[i], true);
+  }
+
+  for (i = 0; i < l; i++) {
+    _countObj(left, s[i], true);
+    _countObj(right, s[i], false);
+
+    if (left.num === right.num) result++;
+    else if (left.num > right.num) return result;
+  }
+  return result;
+};
+ */
+
+/**超出时间限制
+var numSplits = function(s) {
+  var num = 0;
+  var _getNum = function(str) {
+    return new Set(str).size;
+  }
+
+  for (let i = 1, l = s.length; i < l; i++) {
+    var n1 = _getNum(s.substr(0, i));
+    var n2 = _getNum(s.substr(i));
+    if (n1 === n2) num++;
+    if (n1 > n2) return num;
+  }
+  return num;
+};
+ */

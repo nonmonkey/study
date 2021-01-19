@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Due</title>
+</head>
+<body>
+  <div id="test">
+    你好，{{ content }}, {{ description }};
+    <span>{{ description }}</span>
+
+    <div>{{ obj.x }}</div>
+
+    <br>
+    <br>
+    <input type="text" v-model="inputStr">
+    <div>{{ inputStr }}</div>
+
+    <br>
+    <br>
+    <ul>
+      <li v-for="key in list">
+        姓名：{{key.name}}, 年纪：{{key.age}}
+      </li>
+    </ul>
+  </div>
+
+  <script type="module">
+    import Due from './../core/index.js';
+
+    window.due = new Due({
+      el: 'test',
+      data: {
+        content: 'panda',
+        description: 'hello',
+        obj: {
+          x: 1,
+          y: 2,
+        },
+        list: [{ name: 'panda', age: '18' }, { name: 'monkey', age: '20' }],
+        inputStr: '2222'
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./BST.js"></script>
+
+  <script>
+    var i = 0;
+    var tree = new BinarySearchTree();
+    tree.insert(11);
+    tree.insert(7);
+    tree.insert(15);
+    tree.insert(5);
+    tree.insert(3);
+    tree.insert(6);
+    tree.insert(9);
+    tree.insert(8);
+    tree.insert(10);
+    tree.insert(13);
+    tree.insert(12);
+    tree.insert(14);
+    tree.insert(20);
+    tree.insert(18);
+    tree.insert(25);
+    console.log('tree:', tree);
+
+    function printNode(value) {
+      console.log(value);
+    }
+    BinarySearchTree.inOrderTraverseNode(tree.getRoot(), printNode);
+    BinarySearchTree.preOrderTraverseNode(tree.getRoot(), printNode);
+    BinarySearchTree.postOrderTraverse(tree.getRoot(), printNode);
+
+    console.log('tree:', BinarySearchTree.walk(tree.getRoot()));
+    console.log('对称 tree:', BinarySearchTree.isSymmetry(tree.getRoot()));
+  </script>
+</body>
+</html>

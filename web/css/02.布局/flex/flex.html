@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* menu start */
+    .menu {
+      display: flex;
+      flex-direction: row; /* 默认 */
+      justify-content: space-around;
+      margin: 0 auto;
+      width: 80%;
+      border: 1px solid black;
+    }
+
+    .menu-item {
+      flex: 1;
+      text-align: center;
+      line-height: 30px;
+      background-color: darkseagreen;
+      border: 1px solid blanchedalmond;
+    }
+
+    .menu-item:nth-child(3) {
+      order: 0;
+      flex-basis: 100px;
+    }
+    /* menu end */
+
+    /* demo start */
+    .demo {
+      display: flex;
+      justify-content: space-around;
+      width: 80%;
+      margin: 10px auto;
+      background-color: darkturquoise;
+    }
+
+    .left {
+      width: 200px;
+      height: 100px;
+      background-color: #d4cdcd;
+    }
+
+    .right {
+      width: 380px;
+      height: 200px;
+    }
+
+    .btn {
+      width: 100px;
+      text-align: center;
+      color: white;
+      background-color: dimgray;
+      margin: 20px;
+    }
+    /* demo end */
+  </style>
+</head>
+<body>
+  <ul class="menu">
+    <li class="menu-item">1Lorem.</li>
+    <li class="menu-item">2Officiis.</li>
+    <li class="menu-item">3Nam?</li>
+    <li class="menu-item">4Dicta.</li>
+    <li class="menu-item">5Sunt.</li>
+  </ul>
+
+  <div class="demo">
+    <div class="left"></div>
+    <div class="right">
+      <p>Lorem ipsum dolor</p>
+      <span>this is a span1</span>
+      <span>this is a span2</span>
+      <div class="btn">立即参与</div>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="left"></div>
+    <div class="right">
+      <p>Lorem ipsum dolor</p>
+      <span>this is a span1</span>
+      <span>this is a span2</span>
+      <div class="btn">立即参与</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style>
+
+  </style>
+</head>
+<body>
+
+
+  <div id="app">
+    <p>
+      姓名：{{ name }}
+    </p>
+    <P>
+      年龄：{{ age }}
+    </P>
+  </div>
+
+<script src="./../modules/vue/vue.js"></script>
+<script type="module">
+  import compile from './compile.js';
+  import createVNode from './vnode.js';
+  import render from './render.js';
+  import dataResponsive from './dataResponsive.js';
+
+  const vNode = createVNode(document.getElementById('app'));
+
+  const origin = {
+    name: 'monica',
+    age: 16,
+    addr: {
+      province: '黑龙江',
+      city: '哈尔滨'
+    }
+  }
+
+  // let target = {};
+
+  window.target = {};
+
+  dataResponsive(origin, target, function(prop) {
+    console.log('[' + prop + ']' + '属性发生了变化！');
+  });
+
+  // render(vNode, )
+
+  // var app = new Vue({
+  //   el: '#app',
+  //   data: {
+  //     name: 'monica',
+  //     age: 16,
+  //     addr: {
+  //       province: '黑龙江',
+  //       city: '哈尔滨'
+  //     }
+  //   }
+  // })
+  
+</script>
+
+
+
+
+
+</html>

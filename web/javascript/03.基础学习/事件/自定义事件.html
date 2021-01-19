@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    hello world
+
+    <script>
+      // 第一种
+      // /*
+      var event = new Event('click');
+
+      var clickHandle = function (e) {
+        console.log('e:', e);
+        e.preventDefault();
+      };
+
+      // Listen for the event.
+      document.addEventListener(
+        'click',
+        clickHandle,
+        false
+      );
+
+      // Dispatch the event.
+      var canceled = !document.dispatchEvent(event);
+      if (canceled) {
+        console.log('事件取消');
+      } else {
+        console.log('事件未取消');
+      }
+      // dispatchEvent（）方法在当前节点上触发指定事件，从而触发监听函数的执行。该方法返回一个布尔值，只要有一个监听函数调用了Event.preventDefault()，则返回值为false，否则为true。
+      //  */
+    </script>
+
+    <script>
+      /* 第二种
+      添加自定义数据 – CustomEvent()
+
+      var event = new CustomEvent('build', { 'detail': elem.dataset.time });
+
+      下面的代码允许你在事件监听器中访问更多的数据：
+      function eventHandler(e) {
+        log('The time is: ' + e.detail);
+      }
+    */
+    </script>
+
+    <script>
+      /*第三种 触发内置事件
+      function simulateClick() {
+        var event = new MouseEvent('click', {
+          'view': window,
+          'bubbles': true,
+          'cancelable': true
+        });
+        var cb = document.getElementById('checkbox');
+        var cancelled = !cb.dispatchEvent(event);
+        if (cancelled) {
+          // A handler called preventDefault.
+          alert("cancelled");
+        } else {
+          // None of the handlers called preventDefault.
+          alert("not cancelled");
+        }
+      }
+    */
+    </script>
+
+    <script>
+      /* 第四种
+      过时的方式:
+      document.createEvent()
+      event.initEvent()
+      element.dispatchEvent()
+    */
+      //document上绑定自定义事件oneating
+      document.addEventListener(
+        'oneating',
+        function (event) {
+          console.log('event;', event, event.mingzi + '，' + event.message);
+        },
+        false
+      );
+
+      /*
+    创建event的对象实例(
+      HTMLEvents: HTML事件;
+      MutationEvents: DOM结构发生改变触发的事件;
+      MouseEvents: 鼠标事件;
+      UIEvents: UI事件，用于触摸屏设备;
+      Event
+      等
+    )
+    */
+      var event = document.createEvent('HTMLEvents');
+      // 3个参数：事件类型，是否冒泡，是否阻止浏览器的默认行为
+      event.initEvent('oneating', false, false); // 据MDN所说，已从Web标准中删除，可能在未来会删除这个方法。
+      /*属性，随便自己定义*/
+      event.mingzi = 'hello,我是李小贱';
+      event.message = '我今天24岁';
+      // event.cancalable = true;
+
+      //触发自定义事件oneating
+      document.dispatchEvent(event);
+    </script>
+  </body>
+</html>

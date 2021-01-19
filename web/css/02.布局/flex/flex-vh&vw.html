@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .page-body {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      /* justify-items: center; */
+      /* align-content: space-between; */
+      /* 浏览器的宽度 * 5% */
+      font-size: 5vw;
+      border: 1px solid #f40;
+      height: 1000px;
+    }
+
+    /* 解决最后一排无法对齐的问题 */
+    .page-body::after {
+      content: '';
+      height: 0;
+      width: 6em;
+    }
+
+    .page-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 1px solid black;
+    }
+
+    /* .page-item:nth-child(1) {
+      align-self: flex-end;
+    } */
+
+    .page-item img {
+      /* 父容器的font-size的大小*8 */
+      width: 6em;
+      height: 6em;
+      /* 如果使用rem需要在html元素中设置font-size: 5vw; */
+    }
+  </style>
+</head>
+<body>
+  <div class="page-body">
+    <div class="page-item">
+      <img src="http://img.5nd.com/86/photo/2018album/20185/85111.jpg" alt="">
+      <span>哑巴1</span>
+      <span>薛之谦</span>
+    </div>
+    <div class="page-item">
+      <img src="http://img.5nd.com/86/photo/2018album/20185/85111.jpg" alt="">
+      <span>哑巴2</span>
+      <span>薛之谦</span>
+    </div>
+    <div class="page-item">
+      <img src="http://img.5nd.com/86/photo/2018album/20185/85111.jpg" alt="">
+      <span>哑巴3</span>
+      <span>薛之谦</span>
+    </div>
+    <div class="page-item">
+      <img src="http://img.5nd.com/86/photo/2018album/20185/85111.jpg" alt="">
+      <span>哑巴4</span>
+      <span>薛之谦</span>
+    </div>
+    <div class="page-item">
+      <img src="http://img.5nd.com/86/photo/2018album/20185/85111.jpg" alt="">
+      <span>哑巴4</span>
+      <span>薛之谦</span>
+    </div>
+  </div>
+</body>
+</html>

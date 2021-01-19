@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      a.topAction {
+        position: fixed;
+        display: none;
+        right: 20px;
+        bottom: 30px;
+        padding: 3px;
+        font: bold 14px;
+        color: white;
+        background: rgb(144, 33, 33);
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      html,
+      body {
+        transition: 0.3s;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 1.锚点的方式, 通过id -->
+    <!-- 
+  <div id="topAction">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam corrupti harum at nihil illum! Natus architecto, nam reprehenderit itaque iusto veniam, amet, a consectetur dolore nobis exercitationem saepe sit assumenda.</div>
+  <a href="#topAction" class="topAction">BacktoTop</a> 
+  -->
+
+    <div>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam corrupti harum at nihil illum! Natus architecto,
+      nam reprehenderit itaque iusto veniam, amet, a consectetur dolore nobis exercitationem saepe sit assumenda.
+    </div>
+
+    <div>Lorem, ipsum dolor.</div>
+    <div>Placeat, ratione illo.</div>
+    <div>Vel, quam perspiciatis!</div>
+    <div>Aliquam, totam voluptatum?</div>
+    <div>Excepturi, ratione neque.</div>
+    <div>Ullam, nobis expedita.</div>
+    <div>Aperiam, laudantium vero!</div>
+    <div>Sunt, facere repellat?</div>
+    <div>Illo, inventore officiis.</div>
+    <div>Accusantium, rem excepturi?</div>
+    <div>Repellendus, error vel.</div>
+    <div>Officiis, eligendi atque!</div>
+    <div>Molestiae, distinctio sequi.</div>
+    <div>Suscipit, qui itaque.</div>
+    <div>Aspernatur, recusandae alias.</div>
+    <div>Ipsam, quae molestias.</div>
+    <div>Debitis, corporis laboriosam.</div>
+    <div>Iure, amet nobis?</div>
+    <div>Accusantium, tempore delectus!</div>
+    <div>Ad, laborum sunt?</div>
+    <div>Enim, recusandae quos.</div>
+    <div>Inventore, hic perferendis.</div>
+    <div>Quia, temporibus tempora!</div>
+    <div>Itaque, nemo consectetur.</div>
+    <div>Natus, dolor! Eligendi.</div>
+    <div>Iste, delectus atque.</div>
+    <div>Minima, sapiente eos!</div>
+    <div>Quae, blanditiis molestias?</div>
+    <div>Consequatur, accusamus dolorem?</div>
+    <div>Nemo, velit maiores?</div>
+    <div>Nam, aliquam voluptatem?</div>
+    <div>Rem, pariatur commodi?</div>
+    <div>Ipsa, sunt enim.</div>
+    <div>Voluptates, tempora dolores!</div>
+    <div>Vitae, minima aperiam.</div>
+    <div>Ex, dicta enim.</div>
+    <div>Enim, eveniet esse.</div>
+    <div>Consectetur, reiciendis eaque.</div>
+    <div>Vitae, inventore pariatur.</div>
+    <div>Officia, deleniti voluptatem!</div>
+    <div>Illo, unde nisi.</div>
+    <div>A, quae fuga?</div>
+    <div>At, mollitia beatae.</div>
+    <div>Blanditiis, dolorem optio.</div>
+    <div>Nihil, laudantium adipisci.</div>
+    <div>At, magnam debitis?</div>
+    <div>Nisi, velit sit?</div>
+    <div>Dicta, est maiores?</div>
+    <div>Reprehenderit, sunt ipsam?</div>
+    <div>Et, voluptates tempore.</div>
+
+    <a id="topAction" class="topAction">BacktoTop</a>
+    <script src="../../03.基础学习/requestAnimationFrame.js"></script>
+    <script type="text/javascript">
+      /*
+    2.scrollTop获取和设置一个元素内容垂直滚动的像素值
+  */
+      var topAction = document.getElementsByClassName('topAction')[0];
+      var isSliding = false;
+      var timer = null;
+
+      topAction.onclick = function () {
+        // var isTop = document.documentElement.scrollTop || document.body.scrollTop;
+        // document.documentElement.scrollTop = 0;
+        // scrollTo(0, 0);
+        // scrollBy(0, -isTop);
+
+        // 加入动画
+        cancelAnimationFrame(timer);
+        function loop() {
+          isSliding = true;
+          var isTop = document.documentElement.scrollTop + document.body.scrollTop;
+          var speed = Math.ceil(isTop / 7);
+
+          if (document.documentElement.scrollTop) {
+            document.documentElement.scrollTop -= speed;
+          } else if (document.body.scrollTop) {
+            document.body.scrollTop -= speed;
+          }
+          isTop = document.documentElement.scrollTop + document.body.scrollTop;
+
+          if (isTop === 0) {
+            cancelAnimationFrame(timer);
+          } else {
+            timer = requestAnimationFrame(loop);
+            isSliding = false;
+          }
+        }
+        loop();
+      };
+
+      // 触发滚动条事件
+      window.onscroll = function () {
+        if (isSliding) cancelAnimationFrame(timer);
+
+        var isTop = document.documentElement.scrollTop || document.body.scrollTop;
+        if (isTop > 0) {
+          topAction.style.display = 'block';
+        } else {
+          topAction.style.display = 'none';
+        }
+      };
+
+      /*
+    3.scrollTo(x, y) // 滚动当前的window中显示的文档，scrollTo(x, y);
+  */
+
+      /*
+    4.scrollBy(x, y) // x, y 相对值
+  */
+    </script>
+  </body>
+</html>

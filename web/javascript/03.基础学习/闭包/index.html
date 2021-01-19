@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div style="white-space: pre-line;" >阿瓦达所&#10;啊实打实  </div>
+  <script>
+    /*
+      闭包条件：
+      1.由父函数和子函数组成，
+      2.子函数在调用的时候读取父函数的变量，
+      3.子函数有调用
+    */
+
+    /** 
+     * 1.变量的生命周期
+     *    1.局部变量的生命周期在函数执行完成以后结束
+     *    2.全局变量的声明周期在页面关闭后结束
+     */
+
+    /** 
+     * 2.垃圾回收机制
+     *    1.标记清除
+     *    2.引用计数
+     *    注意：如果这个数据有引用的关系，就不会被回收
+     */
+
+    /** 
+     * 3.执行上下文（当前代码的执行环境，EC）
+     *    以下三种情况会产生执行上下文：
+     *    1.全局环境
+     *    2.函数环境
+     *    3.eval环境
+     */
+
+    /** 
+     * 4.执行上下文栈（ECS） == 函数调用栈（call stack）
+     *    1.变量对象
+     */
+
+
+     /** 
+      * 1.普通函数，定义函数的时候是嵌套的，调用的时候也是嵌套的
+      * 2.闭包函数，定义函数的时候是嵌套的，调用的时候是独立的
+      */
+
+
+      function father() {
+        var n = 30;
+        function son() {
+          n ++;
+          console.log(n);
+        }
+        return son;
+      }
+
+      var result = father();
+      result();
+      result();
+
+      /* fatherEC
+        1.创建阶段
+        fatherEC = {
+          VO: { // 变量对象
+            n: undefined, // 找变量声明
+            // son: 'son在内存里的引用地址'
+          },
+          scope: [ // 存储作用域链
+            Global.AO
+          ],
+          // this: window
+        }
+
+        2.执行代码
+        fatherEC = {
+          AO: { // 变量对象
+            n: 30, // 变量赋值
+          },
+          scope: [ // 存储作用域链
+            fatherEC.AO, Global.AO
+          ],
+          // this: window
+        }
+      */
+
+      /* sonEC
+        1.创建阶段
+        sonEC = {
+          VO: { // 变量对象
+
+          },
+          scope: [ // 存储作用域链
+            fatherEC.AO, Global.AO
+          ],
+          // this: window
+        }
+
+        2.执行代码
+        sonEC = {
+          AO: { // 变量对象
+
+          },
+          scope: [ // 存储作用域链
+            sonEC.AO, fatherEC.AO, Global.AO
+          ],
+          // this: window
+        }
+      */
+
+      /*
+        // 示例(特殊情况)，只用子函数和父函数能够凑到一起满足闭包的环境，那就形成闭包的环境。
+        function wrapFn() {
+          var a = 10;
+          function fn1() {
+            return a; // fn1是一个子函数，它的里面用到了a，这个a是父级的，但是这个函数并没有调用
+          }
+
+          function fn2() {
+            debugger; // fn2是一个子函数，它里面没有用到a，但是他调用了。所以就让父级函数形成了一个闭包环境
+          }
+
+          fn2();
+        }
+        wrapFn();
+      */
+
+      /*
+        var lis = document.querySelectorAll('li');
+        for (var i = 0; i < lis.length; i++) {
+          // 以下每次执行完都会被垃圾回收机制给回收，最后只有一个i
+          // lis[i].onclick = function() {
+          //   console.log(i);
+          // }
+
+          // 利用闭包，存在子级函数读取父级函数变量的情况，所以变量不用会回收
+          (function(i) {
+            lis[i].onclick = function() {
+              console.log(i);
+            }
+          })(i)
+        }
+      */
+  </script>
+</body>
+</html>

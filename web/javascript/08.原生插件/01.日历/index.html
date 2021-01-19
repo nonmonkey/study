@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="./index.css"> -->
+
+    <style>
+      .ripple {
+        width: 500px;
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .ripple:after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 30px;
+        left: 30px;
+        pointer-events: none;
+        background-image: radial-gradient(circle, #666 10%, transparent 10.01%);
+        background-repeat: no-repeat;
+        background-position: 50%;
+        transform: scale(10, 10);
+        opacity: 0;
+        transition: transform 0.3s, opacity 0.5s;
+      }
+
+      .ripple:active:after {
+        transform: scale(0, 0);
+        opacity: 0.9;
+        transition: 0s;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container text-center">
+      <button class="btn btn-default ripple btn-lg">Button</button>
+      <button class="btn btn-default ripple btn-lg">Button with very long content</button>
+    </div>
+
+
+    <script src="/modules/jquery/jquery.js"></script>
+    <script>
+      var btns = document.getElementsByTagName('button');
+
+      for (var i = 0; i < btns.length; i++) {
+        btns[i];
+      }
+    </script>
+  </body>
+</html>

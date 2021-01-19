@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    用户名： <input id="username" type="text" /> <br />
+    密码： <input id="password" type="password" /> <br />
+    <input id="submitBtn" type="button" value="提交" /> <br />
+
+    <script type="text/javascript">
+      let username = document.getElementById('username');
+      let password = document.getElementById('password');
+      let submitBtn = document.getElementById('submitBtn');
+
+      let ajax = function (type, url, param) {
+        console.log(type, url, param); // 发送ajax请求的代码
+      };
+
+      let formSubmit1 = function () {
+        if (username.value === '') {
+          return alert('用户名不能为空');
+        }
+        if (password.value === '') {
+          return alert('密码不能为空');
+        }
+        let param = {
+          username: username.value,
+          password: password.value,
+        };
+        ajax('post1', 'http:// xxx.com/login', param);
+      };
+
+      // formSubmit1 函数在此处承担了两个职责，除了提交 ajax 请求之外，还要验证用户输入的合法
+      // 性。这种代码一来会造成函数臃肿，职责混乱，二来谈不上任何可复用性。
+
+      let test1 = function () {
+        submitBtn.onclick = function () {
+          formSubmit1();
+        };
+      };
+      // test1();
+      /*******************************************************************************/
+
+      // 本节的目的是分离校验输入和提交 ajax 请求的代码，我们把校验输入的逻辑放到 validata2 函数中，并且约定当 validata2 函数返回 false 的时候，表示校验未通过，代码如下:
+      let validata2 = function () {
+        if (username.value === '') {
+          alert('用户名不能为空');
+          return false;
+        }
+        if (password.value === '') {
+          alert('密码不能为空');
+          return false;
+        }
+      };
+
+      let formSubmit2 = function () {
+        if (validata2() === false) return;
+
+        let param = {
+          username: username.value,
+          password: password.value,
+        };
+        ajax('post2', 'http:// xxx.com/login', param);
+      };
+
+      let test2 = function () {
+        submitBtn.onclick = function () {
+          formSubmit2();
+        };
+      };
+      // test2();
+      /*******************************************************************************/
+
+      // 现在的代码已经有了一些改进，我们把校验的逻辑都放到了valida函数中，但是formSubmit函数的内部还要计算validata函数的返回值，因为返回值的结果表明了是否通过校验。
+      // 接下来进一步优化这段代码，使validata和formSubmit完全分离出来。首先要改写Function.prototype.before，如果beforeFn的执行结果返回false，表示不再执行后面的原函数。
+      Function.prototype.before = function (beforeFn) {
+        let _self = this;
+        return function () {
+          if (beforeFn.apply(this, arguments) === false) return;
+          return _self.apply(this, arguments);
+        };
+      };
+
+      let validata3 = function () {
+        if (username.value === '') {
+          alert('用户名不能为空');
+          return false;
+        }
+
+        if (password.value === '') {
+          alert('密码不能为空');
+          return false;
+        }
+      };
+
+      let formSubmit3 = function () {
+        let param = {
+          username: username.value,
+          password: password.value,
+        };
+        ajax('post3', 'xxxxxxx', param);
+      };
+      formSubmit3 = formSubmit3.before(validata3);
+
+      let test3 = function () {
+        submitBtn.onclick = function () {
+          formSubmit3();
+        };
+      };
+      test3();
+    </script>
+  </body>
+</html>

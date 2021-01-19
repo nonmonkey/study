@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.calendar {
+  width: 322px;
+  height: 329px;
+  border: 1px solid #e4e4e4;
+  box-shadow: 0px 2px 12px 0;
+  border-radius: 4px;
+  background-color: #fff;
+  user-select: none;
+}
+
+.calendar .header span {
+  vertical-align: middle; 
+}
+
+.calendar .header {
+  padding-top: 15px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.calendar .header .picker-btn {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  font-size: 12px;
+  line-height: 12px;
+  color: #000;
+  background-size: 12px;
+  cursor: pointer;
+}
+
+.calendar .header .picker-prev-year {
+  background-image: url('./left-double.svg');
+}
+
+.calendar .header .picker-prev-month {
+  background-image: url('./left.svg');
+}
+
+.calendar .header .picker-next-month {
+  background-image: url('./right.svg');
+}
+
+.calendar .header .picker-next-year {
+  background-image: url('./right-double.svg');
+}
+
+.calendar .header .picker-date {
+  margin: 0 50px;
+  font-size: 14px;
+}
+
+.calendar .content {
+  margin: 0 10px 10px;
+  color: #606266;
+}
+
+.calendar .picker-weeks {
+  height: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid #ebeef5;
+}
+
+.calendar .picker-weeks .picker-week,
+.calendar .picker-days .picker-day {
+  float: left;
+  margin: 4px 6px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.calendar .picker-weeks .picker-week {
+  font-size: 14px;
+}
+
+.calendar .picker-days .picker-day {
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.calendar .picker-days .picker-day:hover {
+  color: #409eff;
+}
+
+.calendar .picker-days .picker-day.is-today {
+  color: #409eff;
+  font-weight: 700;
+}
+
+.calendar .picker-days .picker-day.is-select {
+  border-radius: 50%;
+  background-color: #409eff;
+  color: #fff;
+}
+
+.calendar .picker-days .picker-day.other-month {
+  color: #c0c4cc;
+}
