@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- crossorigin: 跨域。src本来就有跨域；加上后可以在报错的时候显示详细信息，如果没有，报错不会有详细信息 -->
+    <!-- React的核心库，与宿主环境无关 -->
+    <script crossorigin src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+    <!-- 依赖核心库，将核心的功能与页面结合 -->
+    <script crossorigin src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.0.0-beta.3/babel.min.js"></script>
+    <script>
+      // 1. 字符串
+      // ReactDOM.render('Hello World', document.getElementById('root'));
+
+      // 2. 元素
+      // var span = React.createElement('span', null, '一个span元素');
+      // var h1Dom = React.createElement('h1', { title: 'this is title' }, 'Hello World', span);
+      // ReactDOM.render(h1Dom, document.getElementById('root'));
+    </script>
+    <script type="text/babel">
+      // 3.jsx
+      var h1 = (
+        <h1 title="haha">
+          Hello World <span>this is span</span>
+        </h1>
+      );
+      ReactDOM.render(h1, document.getElementById('root'));
+    </script>
+  </body>
+</html>

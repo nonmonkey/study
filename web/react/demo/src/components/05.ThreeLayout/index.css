@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.three-layout {
+  display: flex;
+  height: 300px;
+}
+
+.three-layout .aside-left {
+  order: 1;
+}
+
+.three-layout .main {
+  flex: 1;
+  order: 2;
+}
+
+.three-layout .aside-right {
+  order: 3;
+}

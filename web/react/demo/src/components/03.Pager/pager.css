@@ -1,0 +1,28 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.item {
+  display: inline-block;
+  margin: 2px;
+  padding: 6px 10px;
+  color: rgb(16, 80, 102);
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.item.disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.active {
+  border: none;
+  color: #f40;
+  cursor: initial;
+}

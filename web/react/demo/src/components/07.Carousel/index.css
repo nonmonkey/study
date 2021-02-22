@@ -1,0 +1,91 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid black;
+}
+
+.carousel-container .imgs {
+  margin-left: 0;
+}
+
+.carousel-container .imgs::after {
+  display: block;
+  content: '';
+  clear: both;
+}
+
+.carousel-container .imgs .img {
+  float: left;
+}
+
+.carousel-container .arrow span {
+  display: inline-block;
+  position: absolute;
+  box-sizing: border-box;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 30px;
+  line-height: 26px;
+  color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, .5);
+  background-color: rgba(255, 255, 255, .5);
+  cursor: pointer;
+  user-select: none;
+}
+
+.carousel-container .arrow span:hover {
+  border: 1px solid rgba(0, 0, 0, .7);
+  background-color: rgba(255, 255, 255, .7);
+}
+
+.carousel-container .arrow span.left {
+  left: 0;
+  padding-left: 2px;
+  text-align: left;
+  border-left: none;
+  border-radius: 0 30px 30px 0;
+}
+
+.carousel-container .arrow span.right {
+  right: 0;
+  padding-right: 2px;
+  text-align: right;
+  border-right: none;
+  border-radius: 30px 0 0 30px;
+}
+
+.carousel-container .dots {
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  padding: 2px 4px;
+  transform: translateX(-50%);
+  border-radius: 8px;
+  border-width: 1px;
+  border-color: rgba(255, 255, 255, .8);
+  background-color: rgba(255, 255, 255, .4);
+}
+
+.carousel-container .dots .dot {
+  display: inline-block;
+  margin: 3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.carousel-container .dots .dot.active {
+  background-color: rgba(255, 0, 0, 1);
+}
+
+.carousel-container .dots .dot:hover {
+  background-color: rgba(255, 0, 0, .5);
+}
