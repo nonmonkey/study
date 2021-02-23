@@ -1,0 +1,50 @@
+
+.container {
+  width: 100px;
+  margin: 0 auto;
+}
+
+.comp-container {
+  position: relative;
+  height: 100px;
+}
+
+.comp-container .title1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.comp-container .title2 {
+  position: absolute;
+  top: 40px;
+  left: 0;
+}
+
+/* 
+.toggle-enter, .toggle-appear {
+  display: block;
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.toggle-enter-active, .toggle-appear-active {
+  transform: translateX(0);
+  transition: .8s;
+  opacity: 1;
+}
+
+.toggle-exit-active {
+  display: block;
+  transform: translate(-100%);
+  transition: .8s;
+  opacity: 0;
+}
+
+.toggle-exit-done {
+  display: none;
+} */
+
+.my-exit-done {
+  display: none;
+}

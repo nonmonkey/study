@@ -5,7 +5,7 @@ import ctx from './formContext';
 import types from '../../utils/commonTypes';
 
 class Form extends React.Component {
-  static defaultTypes = {
+  static defaultProps = {
     data: {},
   };
 
