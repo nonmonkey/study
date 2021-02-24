@@ -1,4 +1,4 @@
-import Test from './components/10.Transition/test.js';
+import Test from './learn/16.Router/backstageManagementSystem/App.js';
 
 export default function App() {
   return (
