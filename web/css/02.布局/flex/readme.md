@@ -77,7 +77,7 @@ justify-items: flex-start | flex-end | center | stretch;
 * space-around
 * space-evenly
 
-### 子元素属性ß
+### 子元素属性
 
 设置了 display: flex; 的元素(父元素)，子元素交叉轴的高度自适应父元素的高度。
 
