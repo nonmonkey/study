@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.page {
+  margin: 0 auto;
+  width: 600px;
+  border: 1px solid black;
+}
+
+.page1 {
+  background-color: lightskyblue;
+}
+
+.page2 {
+  background-color: lightgrey;
+}
+
+.nav {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  padding: 20px;
+  transform: translateY(-50%);
+  background-color: lightsteelblue;
+  color: #ffffff;
+}
+
+.nav a {
+  display: block;
+  margin: 20px 0;
+  color: inherit;
+}
+
+.nav a.active {
+  color: blue;
+}

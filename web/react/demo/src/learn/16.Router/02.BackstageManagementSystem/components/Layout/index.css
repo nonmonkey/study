@@ -40,6 +40,5 @@ html, body, #root {
   right: 0;
   left: 200px;
   bottom: 0;
-  background-color: lightpink;
-  overflow: hidden;
+  overflow: auto;
 }

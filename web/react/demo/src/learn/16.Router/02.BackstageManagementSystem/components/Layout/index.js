@@ -6,7 +6,7 @@ export default class Layout extends React.Component {
   static propTypes = {
     header: types.element,
     aside: types.element,
-    children: types.element,
+    children: types.node,
   };
 
   render() {

@@ -1,0 +1,17 @@
+.tab {
+  box-sizing: border-box;
+  margin: 20px 0;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.tab tr {
+  line-height: 35px;
+}
+
+.tab th,
+.tab td {
+  border: 1px solid #cccccc;
+}
