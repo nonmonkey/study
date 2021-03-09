@@ -5,7 +5,7 @@ function login() {
   var params = 'stuNum=' + stuNum + '&password=' + password;
 
   var xmlHttp = new XMLHttpRequest();
-  xmlHttp.open('post', '/login?' + params, true);
+  xmlHttp.open('get', '/login?' + params, true);
   xmlHttp.send(null);
 
   xmlHttp.onreadystatechange = function () {
