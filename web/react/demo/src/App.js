@@ -1,11 +1,9 @@
-// import Test from './learn/16.Router/08.滚动条复位/App.js';
-import './learn/17.Redux/插件/redux-thunk/index.js';
+import Test from './learn/17.Redux/react-redux/02.connect/App.js';
 
 export default function App() {
   return (
     <>
-      123
-      {/* <Test></Test> */}
+      <Test></Test>
     </>
   );
 }

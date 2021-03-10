@@ -1,12 +1,12 @@
 // import { createStore, applyMiddleware } from 'redux';
-import { createStore, applyMiddleware } from '../../源码/index';
+import { createStore, applyMiddleware } from '../../../源码/index';
 import * as Redux from 'redux';
 import reducer from './reducer/index';
 import { createSetUsersAction, createSetLoadingAction, fetchUsers } from './action/usersAction';
 import logger from 'redux-logger';
 // import thunk from 'redux-thunk';
-import thunk from './源码/index';
-import getAllStudents from '../../../../services/student';
+import thunk from '../源码/index';
+import getAllStudents from '../../../../../services/student';
 
 console.log((window.Redux = Redux));
 
