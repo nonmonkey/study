@@ -8,4 +8,5 @@
 // const app = createApp(App);
 // app.mount('#app');
 
-import './learn/06.数据共享/03.provide&inject/main.js';
+
+import './learn/06.数据共享/01.vuex/main.js';

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- view -->
+    <div id="root">
+      foo: {{ state.foo }}
+      <br />
+      bar: {{ state.nested.bar }}
+
+      <br>
+      <Child></Child>
+    </div>
+
+    <!-- <script src="https://unpkg.com/vue@3.0.7/dist/vue.global.js"></script> -->
+    <script src="./src/assets/vue.global.js"></script>
+
+    <script>
+      const { createApp, defineComponent, isReactive, toRaw, shallowReactive, reactive, ref, shallowRef, h } = Vue;
+
+      const Child = defineComponent({
+        name: 'Child',
+        setup(props) {
+          const text = reactive({ msg: 'this is child' });
+          return () => h('h3', text.msg);
+        }
+      })
+
+      const App = defineComponent({
+        name: 'App',
+        setup(props) {
+          const state = {
+            foo: 1,
+            nested: {
+              bar: 2,
+            },
+          };
+          const stateRef = ref(state);
+
+          window.state = stateRef;
+          // // 改变状态本身的性质是响应式的
+          // state.foo++;
+          // // ...但是不转换嵌套对象
+          // isReactive(state.nested); // false
+          // state.nested.bar++; // 非响应式
+
+          return {
+            state: stateRef,
+          };
+        },
+      });
+
+      const app = createApp(App).component('Child', Child);
+      app.mount('#root');
+    </script>
+  </body>
+</html>

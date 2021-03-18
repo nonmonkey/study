@@ -1,10 +1,19 @@
 import loginUser from './loginUser';
-import { createStore, createLogger } from 'vuex';
+import { createLogger } from 'vuex';
 
-export default createStore({
+const options = {
   modules: {
     loginUser,
+    app: {
+      actions: {
+        test({ dispatch }) {
+          dispatch('loginUser/whoAmI');
+        },
+      },
+    },
   },
   // createLogger log工具
   plugins: [createLogger()],
-});
+};
+
+export default options;

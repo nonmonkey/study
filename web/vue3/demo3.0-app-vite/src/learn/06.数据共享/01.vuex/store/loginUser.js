@@ -28,11 +28,12 @@ export default {
       commit('setUser', null);
       commit('setLoading', false);
     },
-    async whoAmI({ commit }) {
+    async whoAmI({ commit, dispatch }) {
       commit('setLoading', true);
       const user = await userServ.whoAmI();
-      conmit('setUser', user);
+      console.log('user:', user);
+      commit('setUser', user);
       commit('setLoading', false);
-    }
-  }
-}
+    },
+  },
+};

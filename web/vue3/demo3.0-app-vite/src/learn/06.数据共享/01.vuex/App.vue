@@ -15,6 +15,7 @@
 
 <script>
 import { computed } from 'vue';
+// import { useStore } from '/src/learn/06.数据共享/myVuex/index.js';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 
@@ -23,7 +24,6 @@ export default {
   setup() {
     const store = useStore();
     const router = useRouter();
-    console.log('store:', store);
     const handleLogout = async () => {
       await store.dispatch('loginUser/logout');
       router.push('/login');

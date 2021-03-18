@@ -18,6 +18,7 @@
 <script>
 import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
+// import { useStore } from '/src/learn/06.数据共享/myVuex/index.js';
 import { useRouter } from 'vue-router';
 
 export default {
