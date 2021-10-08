@@ -1,6 +1,10 @@
-/**
-// 进度：
-
-系列文章 
-  前端进阶算法3：从浏览器缓存淘汰策略和Vue的keep-alive学习LRU算法
- */
+class Animal {
+  constructor() {
+    this.name = 123;
+    this.age = 18;
+  }
+  
+  say() {
+    console.log('hello');
+  }
+}

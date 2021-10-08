@@ -48,8 +48,7 @@ function changeLocation(query, history) {
 export default function StudentList(props) {
   const query = getQuery(props.location.search);
   const resp = useResp(query);
-
-  console.log('StudentList props:', props);
+  console.log('StudentList props:', props, resp);
 
   return (
     <div>

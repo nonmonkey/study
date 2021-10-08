@@ -1,7 +1,7 @@
 import React from 'react';
 // import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { decreaseAction, decreaseAsyncAction, increaseAction, increaseAsyncAction } from '../store/action/counter';
+import { connect } from '../index';
+import { decreaseAction, decreaseAsyncAction, increaseAction, increaseAsyncAction } from '../../store/action/counter';
 
 /**
  * 展示组件
@@ -62,4 +62,6 @@ function mapDispatchs(dispatch) {
   // );
 }
 
+// connect 返回一个高阶组件
+// 传入展示组件，返回一个容器组件
 export default connect(mapStates, mapDispatchs)(Counter);

@@ -79,7 +79,6 @@
     fire2();
     atomDecorator();
   };
-
   let test = function () {
     plane.fire();
   };

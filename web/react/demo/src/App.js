@@ -1,4 +1,4 @@
-import Test from './learn/17.Redux/react-redux/02.connect/App.js';
+import Test from './learn/16.Router/04.授权页面/App.js';
 
 export default function App() {
   return (

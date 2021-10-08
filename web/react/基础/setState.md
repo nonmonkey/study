@@ -33,6 +33,14 @@ this.setState(
 ```
 
 **写法二：第一个参数为函数**
+
+```JS
+// Correct
+this.setState((state, props) => ({
+  counter: state.counter + props.increment
+}));
+```
+
 ```JS
 this.setState(
   // 参数prev表示当前的状态
