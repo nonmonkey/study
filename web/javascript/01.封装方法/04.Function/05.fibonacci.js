@@ -2,7 +2,7 @@ var fibonacci = (function () {
   var arr = [0, 1];
 
   return function (n) {
-    if (n === 0 || arr[n]) return arr[n];
+    if (arr[n]) return arr[n];
 
     var i = arr.length;
     while (i <= n) {

@@ -8,7 +8,7 @@ class EventEmitter {
     if (!this.events.get(type)) {
       this.events.set(type, [fn]);
     } else {
-      this.events.get(type).push(fn)
+      this.events.get(type).push(fn);
     }
   }
 
@@ -16,6 +16,24 @@ class EventEmitter {
     let handlers = this.events.get(type);
     for (let i = 0, len = handlers.length; i < len; i++) {
       handlers[i].apply(this, Array.from(arguments).slice(1));
+    }
+  }
+
+  remove(type, fn) {
+    if (fn) {
+      let handlers = this.events.get(type);
+      if (handlers) {
+        let index = handlers.findIndex((_fn) => _fn === fn);
+        if (index > -1) {
+          handlers.splice(index, 1);
+          this.events.set(type, handlers);
+          if (this.events.get(type).length === 0) {
+            this.remove(type);
+          }
+        }
+      }
+    } else {
+      this.events.delete(type);
     }
   }
 }

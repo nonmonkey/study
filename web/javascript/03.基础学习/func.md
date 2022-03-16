@@ -30,6 +30,10 @@ str.replaceAll('l', ''); // "heo word"
 
 ```JS
 [1, 2, [3, 4]].flat(); // [1, 2, 3, 4]
+
+// 你也可以定义一个深度级别，指定一个嵌套的数组结构应该被扁平化的深度
+const arr = [0, 1, 2, [[[3, 4]]]];
+console.log(arr.flat(2)); // returns [0, 1, 2, [3,4]]
 ```
 
 #### 2.flatMap

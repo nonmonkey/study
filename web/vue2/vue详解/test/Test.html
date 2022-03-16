@@ -1,59 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <div id="app">
-      title: <span>{{ title }}</span>
-      <br />
-
-      <!-- <Comp></Comp> -->
-    </div>
-
-    <script src="./vue.js"></script>
-    <!-- <script src="./vue3.js"></script> -->
-    <script>
-      window.Vue = Vue;
-
-      // Vue.component('Comp', {
-      //   name: 'Comp',
-      //   data() {
-      //     return {
-      //       msg: 'this is Comp',
-      //       num: 1,
-      //     };
-      //   },
-      //   methods: {
-      //     handleChange() {
-      //       this.num++;
-      //     },
-      //   },
-      //   render(h) {
-      //     console.log('render', 'Comp');
-      //     return h('div', [
-      //       h('span', { attrs: { id: 'comp-title' }, key: this.msg + this.num }, this.msg + this.num),
-      //       h('button', { on: { click: this.handleChange } }, 'change'),
-      //     ]);
-      //   },
-      // });
-
-      var vm = new Vue({
-        el: '#app',
-        data: {
-          title: 'hello world',
-          user: Object.freeze({
-            name: 'm',
-            age: 18
-          }),
-          hobbiles: ['12', '34'],
-        },
-      });
-
-      console.log('1');
-    </script>
-  </body>
-</html>
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="(value, index) in arr" :key="index">
+        <test />
+      </li>
+    </ul>
+    <button @click="handleDelete">delete</button>
+  </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+  new Vue({
+    name: 'App',
+    el: '#app',
+    data() {
+      return {
+        arr: [1, 2, 3],
+      };
+    },
+    methods: {
+      handleDelete() {
+        this.arr.splice(0, 1);
+      },
+    },
+    components: {
+      test: { template: '<li>{{Math.random()}}</li>' },
+    },
+  });
+</script>
