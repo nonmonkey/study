@@ -67,8 +67,8 @@ IntervalRecord.prototype.reset = function () {
 };
 
 function _mergeIntervalOptions (options) {
-  options.interval = Number.parseInt(options.interval) || 10000;
-  options.max = Number.parseInt(options.max) || 360;
+  options.interval = Math.abs(Number.parseInt(options.interval)) || 10000;
+  options.max = Math.abs(Number.parseInt(options.max)) || 360;
 
   const record = new IntervalRecord(options.max);
   options.record = record;
@@ -109,14 +109,33 @@ function _mergeMultiArgs (argsArr, instance, options) {
       if (arg) arg[2].immediate = false; // options.immediate
       return arg;
     })
-    .filter(a => !!a);
+    .filter(arg => !!arg);
 
   return resultArgs;
 }
 
+const retryFinishFnSymbol = Symbol('retryFinish');
+function _mergeRetryOptions (options) {
+  options.retryImmediate = 'immediate' in options ? !!options.immediate : true;
+  options.immediate = false;
+  options.retries = Math.abs(Number.parseInt(options.retries)) || 3;
+  options.retryCondition = _.isFunction(options.retryCondition) ? options.retryCondition : data => !!_.identity(data);
+  options.max = options.retries + 1; // retries指额外执行的次数
+
+  options[retryFinishFnSymbol] = _.noop;
+  options.onSuccess.push((res) => {
+    if (options.retryCondition(res)) {
+      options[retryFinishFnSymbol](res);
+    }
+  });
+  return options;
+}
 
 export {
   _mergeOutermostArgs,
+  _mergeMultiArgs,
+
   _mergeIntervalOptions,
-  _mergeMultiArgs
+  retryFinishFnSymbol,
+  _mergeRetryOptions
 };

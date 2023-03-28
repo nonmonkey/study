@@ -166,6 +166,35 @@ div::before{
 </html>
 ```
 
+```HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    num::before {
+      counter-reset: num var(--num);
+      content: counter(num);
+    }
+
+    num::after {
+      content: 'reads';
+    }
+</style>
+</head>
+<body>
+  <div>
+    <num style="--num:1"></num>
+    <num style="--num:99"></num>
+    <num style="--num:102"></num>
+  </div>
+</body>
+</html>
+```
+
 #### 2.伪类选择器
 
 Pseudo-Classes Selectors(伪类选择器)

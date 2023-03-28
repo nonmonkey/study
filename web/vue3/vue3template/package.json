@@ -10,7 +10,11 @@
   "dependencies": {
     "@vueuse/core": "^8.2.5",
     "axios": "^0.26.1",
+    "element-plus": "^2.1.11",
     "lodash": "^4.17.21",
+    "markdown-it": "^13.0.1",
+    "marked": "^4.2.5",
+    "md5": "^2.3.0",
     "mockjs": "^1.1.0",
     "pinia": "^2.0.13",
     "vue": "^3.2.25"

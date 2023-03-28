@@ -7,27 +7,18 @@
   <title>Document</title>
   <style>
     .masonry {
+      width: 80%;
+      margin: 2em auto;
+
       -moz-column-count: 3;
       /* Firefox */
       -webkit-column-count: 3;
       /* Safari 和 Chrome */
       column-count: 3;
+
       -moz-column-gap: 2em;
       -webkit-column-gap: 2em;
       column-gap: 2em;
-      width: 80%;
-      margin: 2em auto;
-    }
-
-    .item {
-      padding: 2em;
-      margin-bottom: 2em;
-      /* 设置在表格元素内部避免进行分页的分页行为： */
-      -moz-page-break-inside: avoid;
-      page-break-inside: avoid;
-      -webkit-column-break-inside: avoid;
-      break-inside: avoid;
-      background: #f60;
     }
 
     @media screen and (max-width: 800px) {
@@ -40,6 +31,17 @@
       .masonry {
         column-count: 1;
       }
+    }
+
+    .item {
+      padding: 2em;
+      margin-bottom: 2em;
+      /* 设置在表格元素内部避免进行分页的分页行为： */
+      -moz-page-break-inside: avoid;
+      page-break-inside: avoid;
+      -webkit-column-break-inside: avoid;
+      break-inside: avoid;
+      background: rgb(200, 195, 191);
     }
   </style>
 </head>

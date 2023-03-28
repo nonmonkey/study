@@ -5,7 +5,7 @@ import aIns from '../../instances';
 export default {
   getHistoryToday () {
     const config = {
-      method: 'GET',
+      method: 'get',
       url: '/lishijr',
       params: { api_key: 'd50beeac82d5f9ab' }
     };

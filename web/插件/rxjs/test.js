@@ -34,32 +34,7 @@ const {
   reduce, // 每次 reduce 归并后，没有立即触发 subscribe，而是在最终结束归并后，才发出消息。
 } = window.rxjs;
 
-// var button1 = fromEvent(document.querySelector('#button1'), 'click');
-// var button2 = fromEvent(document.querySelector('#button2'), 'click');
 
-// const obs1 = button1
-//   .pipe(
-//     map(() => state => Object.assign({}, state, {count: state.count - 1})),
-//   )
-// const obs2 = button2
-//   .pipe(
-//     map(() => state => Object.assign({}, state, {count: state.count + 1})),
-//   )
 
-// const obs = merge(obs1, obs2)
-//   .pipe(
-//     scan((state, changeFn) => changeFn(state), {count: 0})
-//   )
-
-// const s = button1.subscribe(console.log);
-
-var myObservable = Observable.create(observer => {
-  observer.next('foo');
-  var id = setInterval(() => observer.next('bar'), 2000);
-  return function finalizer() {
-    clearInterval(id)
-  }
-});
-// var suber = myObservable.subscribe(value => console.log(111, value));
 
 console.log('****this is end.****')

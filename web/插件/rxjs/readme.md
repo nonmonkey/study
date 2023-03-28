@@ -2,6 +2,12 @@
 
 ---
 
+### 〇、介绍
+
+Rxjs官方是这样说的: Think of RxJS as Lodash for events. 把Rxjs想像成针对events的lodash，也就是说，Rxjs本质是个工具库，处理的是事件。这里的events，可以称之为流。
+
+那么流是指什么呢？举个例子，代码中每1s输出一个数字，用户每一次对元素的点击，就像是在时间这个维度上，产生了一个数据集。这个数据集不像数组那样，它不是一开始都存在的，而是随着时间的流逝，一个一个数据被输出出来。这种异步行为产生的数据，就可以被称之为一个流，在Rxjs中，称之为observable（抛开英文，本质其实就是一个数据的集合，只是这些数据不一定是一开始就设定好的，而是随着时间而不断产生的）。而Rxjs，就是为了处理这种流而产生的工具，比如流与流的合并，流的截断，延迟，消抖等等操作。
+
 ### 一、基础
 
 ```JS
@@ -47,6 +53,9 @@ var myObservable = Observable.create(subscriber => {
 });
 var subscriber = myObservable.subscribe(value => console.log(value));
 ```
+
+1. subscribe不是订阅，而是启动这个流，可以看到，subscribe后，才会执行next方法 
+2. 构建observable的时候，会有一个subscriber.next，这里就是控制这个流中数据的输出。
 
 ```JS
 // 合并Observable

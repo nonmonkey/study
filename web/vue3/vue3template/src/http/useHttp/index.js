@@ -3,6 +3,7 @@ import useHttpInterval from './useHttpInterval';
 import useHttpAll from './useHttpAll';
 import useHttpAny from './useHttpAny';
 import useHttpRace from './useHttpRace';
+import useHttpRetry from './useHttpRetry';
 
 export default useHttp;
 export {
@@ -10,5 +11,6 @@ export {
   useHttpInterval,
   useHttpAll,
   useHttpAny,
-  useHttpRace
+  useHttpRace,
+  useHttpRetry
 };

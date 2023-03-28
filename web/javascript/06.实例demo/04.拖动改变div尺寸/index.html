@@ -1,0 +1,146 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head runat="server">
+  <title></title>
+</head>
+
+<body>
+  <div id="StreetOverviewFrame" tabindex="-1" style="position: absolute; right: 10px; bottom: 10px;
+        z-index: 200; overflow: hidden; visibility: visible; width: 771px; height: 150px;background-color:Red;">
+    <div id="mapContainer" style="position: absolute; width: 100%; height: 100%; top: 0px;
+            left: 0px;">
+    </div>
+    <div id="tz" style="position: absolute; left: 1px; top: 1px; width: 28px; height: 28px; cursor: se-resize;
+            z-index: 200001; background-image: url(&quot;about:blank&quot;);">
+      <div title="拖动调整大小" style="position: absolute; left: 0px; top: 0px; width: 27px;
+                height: 20px; cursor: se-resize; z-index: 100; background-image: url(&quot;http://s.map.soso.com/themes/default/img/street/overview_control.png?v=v3.3.805&quot;);
+                background-position: 0px 0px;">
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script>
+  <script type="text/javascript">
+    var obj = null;
+    var divObj = null;
+    var deltaX, deltaY, _startX, _startY;
+    $(document).ready(function () {
+      obj = document.getElementById("tz");
+      divObj = document.getElementById("StreetOverviewFrame");
+
+      obj.addEventListener('mousedown', function (event) {
+        //将鼠标位置转为文档坐标
+        var scroll = getScrollOffsets();
+        var startX = event.clientX + scroll.x;
+        var startY = event.clientY + scroll.y;
+
+        _startX = parseInt(startX);
+        _startY = parseInt(startY);
+        if (document.addEventListener) {
+          document.addEventListener("mousemove", moveHandler, true);
+          document.addEventListener("mouseup", upHandler, true);
+        } else if (document.attachEvent) {
+          obj.setCapture();
+          obj.attachEvent("onlosecapeture", upHandler);
+          obj.attachEvent("onmouseup", upHandler);
+          obj.attachEvent("onmousemove", moveHandler);
+
+        }
+
+        //处理了这个事件，不让任何其它元素看到它
+        if (event.stopPropagation) event.stopPropagation(); //标准模型
+        else event.cancelBubble = true;
+
+        //现在阻止任何默认操作
+        if (event.preventDefault) event.preventDefault();
+        else event.returnValue = false;
+      });
+
+      MapInIt();
+
+      $("#StreetOverviewFrame").mouseover(function () {
+        navControl.show();
+      }).mouseout(function () {
+        navControl.hide();
+      });
+    });
+
+    function moveHandler(e) {
+      if (!e) e = window.event; //ie事件模型
+      var startX = parseInt(e.clientX);
+      var startY = parseInt(e.clientY);
+
+      deltaX = startX - _startX;
+      deltaY = startY - _startY;
+      if (_startX > startX) {
+        divObj.style.width = ($("#StreetOverviewFrame").width() - deltaX) + "px";
+      } else {
+        divObj.style.width = ($("#StreetOverviewFrame").width() - deltaX) + "px";
+      }
+
+      if (_startY > startY) {
+        divObj.style.height = ($("#StreetOverviewFrame").height() - deltaY) + "px";
+      } else {
+        divObj.style.height = ($("#StreetOverviewFrame").height() - deltaY) + "px";
+      }
+      _startX = startX;
+      _startY = startY;
+      if (e.stopPropagation) e.stopPropagation(); //标准模型
+      else e.cancelBubble = true;
+    }
+
+    function upHandler(e) {
+      if (!e) e = window.event; //ie事件模型
+      //注销捕获事件处理程序
+      if (document.removeEventListener) {
+        document.removeEventListener("mousemove", moveHandler, true);
+        document.removeEventListener("mouseup", upHandler, true);
+      } else if (document.detachEvent) {
+        obj.detachEvent("onlosecapeture", upHandler);
+        obj.detachEvent("onmouseup", upHandler);
+        obj.detachEvent("onmousemove", moveHandler);
+        obj.releaseCapture();
+      }
+
+
+      if (e.stopPropagation) e.stopPropagation(); //标准模型
+      else e.cancelBubble = true;
+    }
+
+    //以一个对象的x和y属性的方式返回滚动条的偏移量
+    function getScrollOffsets(w) {
+      // 使用指定的窗口，如果不带参数则使用当前窗口
+      w = w || window;
+      // 除了IE8及更早的版本以外，其它浏览器版本都能用
+      if (w.pageXOffset != null) return { x: w.pageXOffset, y: w.pageYOffset };
+
+      // 对标准模式下的IE（或任何浏览器）
+      var d = w.document;
+      if (document.compatMode == "CSS1Compat")
+        return { x: d.documentElement.scrollLeft, y: d.documentElement.scrollTop };
+
+      //对怪异模式下的浏览器
+      return { x: d.body.scrollLeft, y: d.body.scrollTop };
+    }
+    var navControl = null;
+    //初始化地图
+    function MapInIt() {
+      map = new BMap.Map("mapContainer");
+      var point = new BMap.Point(121.1234, 31.1234);
+      map.centerAndZoom(point, 12);
+      navControl = new BMap.NavigationControl();
+      map.addControl(navControl); //添加导航条
+      map.addControl(new BMap.ScaleControl()); //添加比例尺控件
+      //地图惯性拖拽
+      map.enableInertialDragging();
+      //地图滚轮
+      map.enableScrollWheelZoom();
+    }
+
+  </script>
+</body>
+
+</html>

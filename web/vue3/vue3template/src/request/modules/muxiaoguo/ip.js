@@ -16,7 +16,7 @@ export default {
    */
   getIPLocation (ip = '', type = 'm') {
     const config = {
-      method: 'GET',
+      method: 'get',
       url: '/ip',
       params: {
         api_key: '2c7a2f463d49b219',
@@ -31,7 +31,7 @@ export default {
   getIPLocationRace (IPs = [], type = 'm') {
     const configs = IPs.map((IP) => {
       return {
-        method: 'GET',
+        method: 'get',
         url: '/ip',
         params: {
           api_key: '2c7a2f463d49b219',
@@ -47,7 +47,7 @@ export default {
   getIPLocationAny (IPs = [], type = 'm') {
     const configs = IPs.map((IP) => {
       return {
-        method: 'GET',
+        method: 'get',
         url: '/ip',
         params: {
           api_key: '2c7a2f463d49b219',
@@ -63,7 +63,7 @@ export default {
   getIPLocationAll (IPs = [], type = 'm') {
     const configs = IPs.map((IP) => {
       return {
-        method: 'GET',
+        method: 'get',
         url: '/ip',
         params: {
           api_key: '2c7a2f463d49b219',

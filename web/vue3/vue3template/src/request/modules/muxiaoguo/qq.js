@@ -5,7 +5,7 @@ import aIns from '../../instances';
 export default {
   getQQInfo (qq = '') {
     const config = {
-      method: 'GET',
+      method: 'get',
       url: '/QqInfo',
       params: {
         api_key: '3ad9e6fe4b4ed658',

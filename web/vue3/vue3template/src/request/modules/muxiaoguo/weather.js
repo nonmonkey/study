@@ -22,7 +22,7 @@ export default {
    */
   getWeather (city = '', type = 1) {
     const config = {
-      method: 'GET',
+      method: 'get',
       url: '/tianqi',
       params: {
         api_key: 'f9b4dab6b866b487',

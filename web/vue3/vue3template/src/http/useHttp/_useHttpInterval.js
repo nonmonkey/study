@@ -4,11 +4,9 @@ import {
   computed
 } from 'vue';
 import _useHttp from './_useHttp';
-import { _mergeIntervalOptions } from './_mergeArgs';
 import { defReadonlyProps } from './_utils';
 
 export default function _useHttpInterval (config, instance, options) {
-  options = _mergeIntervalOptions(options);
   const record = options.record;
   const { execute, abort, ...otherResult } = _useHttp(config, instance, options);
   const isRunning = ref(false);

@@ -5,7 +5,7 @@ import aIns from '../../instances';
 export default {
   getDomainRegister (url = '') {
     const config = {
-      method: 'GET',
+      method: 'get',
       url: '/ymzhuce',
       params: {
         api_key: 'ff4bc5175a03b898',

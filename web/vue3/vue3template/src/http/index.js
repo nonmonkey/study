@@ -5,10 +5,11 @@ import {
 } from './config';
 import {
   useHttp,
+  useHttpInterval,
   useHttpAll,
   useHttpAny,
   useHttpRace,
-  useHttpInterval
+  useHttpRetry
 } from './useHttp';
 import createAxiosIns from './createAxiosIns';
 
@@ -26,10 +27,11 @@ HttpCtor.prototype.install = function install (app) {
 HttpCtor.prototype.axios = axios;
 HttpCtor.prototype.http = useHttp;
 HttpCtor.prototype.useHttp = useHttp;
+HttpCtor.prototype.useHttpInterval = useHttpInterval;
 HttpCtor.prototype.useHttpAll = useHttpAll;
 HttpCtor.prototype.useHttpAny = useHttpAny;
 HttpCtor.prototype.useHttpRace = useHttpRace;
-HttpCtor.prototype.useHttpInterval = useHttpInterval;
+HttpCtor.prototype.useHttpRetry = useHttpRetry;
 
 function createHttp (requestFns, aIns) {
   return new HttpCtor(requestFns, aIns);
@@ -44,5 +46,6 @@ export {
   useHttpInterval,
   useHttpAll,
   useHttpAny,
-  useHttpRace
+  useHttpRace,
+  useHttpRetry
 };

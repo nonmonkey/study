@@ -16,13 +16,15 @@ outputBuildMsg();
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: './',
+
+  resolve: { alias: { '@': resolve(__dirname, 'src') } },
+
   plugins: [
     vue(),
     eslintPlugin({
       include: ['src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue'],
       cache: false
     })
-  ],
-
-  resolve: { alias: { '@': resolve(__dirname, 'src') } }
+  ]
 });
