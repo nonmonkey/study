@@ -168,3 +168,64 @@ for(var i = 0,len = list.length;i < len ; i ++){
   console.log(list[i]());
 }  //0 1 2 3 4
 ```
+
+### 五、闭包的漏洞
+
+```JS
+// 示例可以在不暴露obj的情况下，获取obj对象的属性值
+var o = (function () {
+  var obj = {
+    a: 1,
+    b: 2
+  };
+
+  return {
+    get: function (key) {
+      return obj[key]
+    }
+  }
+})()
+
+// 但是可以通过修改Object原型，读取到obj对象
+Object.defineProperty(Object.prototype, 'abc', {
+  get() {
+    return this;
+  }
+})
+console.log(o.get('abc'))
+```
+
+完善上述代码:
+```JS
+// 方法一
+var o = (function () {
+  var obj = {
+    a: 1,
+    b: 2
+  };
+
+  return {
+    get: function (key) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        return obj[key]
+      }
+      return null
+    }
+  }
+})()
+
+// 方法二
+var o = (function () {
+  var obj = {
+    a: 1,
+    b: 2
+  };
+  Object.setPrototypeOf(obj, null);
+
+  return {
+    get: function (key) {
+      return obj[key]
+    }
+  }
+})()
+```

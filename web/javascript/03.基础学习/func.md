@@ -2,9 +2,30 @@
 
 ---
 
+### 〇、函数基础
+
+#### 1.函数签名
+
+1. 设计 函数签名
+   函数名、参数列表、返回值
+
+2. 实现
+
+#### 2.如何判断函数是通过 new 来调用的
+
+```JS
+function a() {
+  if (new.target) {
+    throw new Error(`Can't invoke with 'new'`);
+  }
+  console.log('a')
+}
+```
+
 ### 一、String
 
 #### 1.padStart
+
 #### 2.padEnd
 
 ```JS
@@ -13,6 +34,7 @@
 ```
 
 #### 3.trimStart
+
 #### 4.trimEnd
 
 去除字符串首尾空白字符

@@ -4,9 +4,24 @@
 
 ### 〇、介绍
 
+RxJS 是使用 Observables 的响应式编程的库，它使编写异步或基于回调的代码更容易。
 Rxjs官方是这样说的: Think of RxJS as Lodash for events. 把Rxjs想像成针对events的lodash，也就是说，Rxjs本质是个工具库，处理的是事件。这里的events，可以称之为流。
 
-那么流是指什么呢？举个例子，代码中每1s输出一个数字，用户每一次对元素的点击，就像是在时间这个维度上，产生了一个数据集。这个数据集不像数组那样，它不是一开始都存在的，而是随着时间的流逝，一个一个数据被输出出来。这种异步行为产生的数据，就可以被称之为一个流，在Rxjs中，称之为observable（抛开英文，本质其实就是一个数据的集合，只是这些数据不一定是一开始就设定好的，而是随着时间而不断产生的）。而Rxjs，就是为了处理这种流而产生的工具，比如流与流的合并，流的截断，延迟，消抖等等操作。
+RxJS中解决异步事件管理的基本概念是:
+* Observable： 表示未来值或事件的可调用集合的概念。
+* Observer：是一个回调函数的集合，它知道如何监听Observable传递的值。
+* Subscription：表示一个可观察对象的执行，主要用于取消执行
+* Operators：是纯函数，支持函数式编程风格，通过map、filter、concat、reduce等操作来处理集合。
+* Subject：等同于EventEmitter，并且是将一个值或事件多播到多个观察者的唯一方法。
+* Schedulers：是控制并发性的集中式调度程序，允许我们在计算发生时进行协调，例如setTimeout或requestAnimationFrame或其他。
+
+> 那么流是指什么呢？举个例子，代码中每1s输出一个数字，用户每一次对元素的点击，就像是在时间这个维度上，产生了一个数据集。这个数据集不像数组那样，它不是一开始都存在的，而是随着时间的流逝，一个一个数据被输出出来。这种异步行为产生的数据，就可以被称之为一个流，在Rxjs中，称之为observable（抛开英文，本质其实就是一个数据的集合，只是这些数据不一定是一开始就设定好的，而是随着时间而不断产生的）。而Rxjs，就是为了处理这种流而产生的工具，比如流与流的合并，流的截断，延迟，消抖等等操作。
+
+> 何为响应式？？
+响应式编程或反应式编程（Reactive programming）是一种面向数据流和变化传播的声明式编程范式。这意味着可以在编程语言中很方便地表达静态或动态的数据流，而相关的计算模型会自动将变化的值通过数据流进行传播。
+>> 优势
+1.声明式，方便地表达静态或动态的数据流。
+2.自动化，自动将变化的值通过数据流进行传播。
 
 ### 一、基础
 
@@ -51,7 +66,7 @@ var myObservable = Observable.create(subscriber => {
     clearInterval(id)
   }
 });
-var subscriber = myObservable.subscribe(value => console.log(value));
+var subscription = myObservable.subscribe(value => console.log(value));
 ```
 
 1. subscribe不是订阅，而是启动这个流，可以看到，subscribe后，才会执行next方法 

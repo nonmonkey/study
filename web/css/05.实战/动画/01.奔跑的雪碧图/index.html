@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #sprite {
+      width: 125px;
+      height: 134px;
+      border: 2px solid black;
+      background: url('./sprite.webp') no-repeat;
+      animation: run 1s steps(12) infinite;
+    }
+
+    @keyframes run {
+      0% {
+        background-position-x: 0;
+      }
+
+      100% {
+        background-position-x: -1500px;
+      }
+    }
+
+    img {
+      -webkit-box-reflect: below 10px linear-gradient(transparent, transparent, rgba(0, 0, 0, .3));
+    }
+  </style>
+</head>
+
+<body>
+  <div id="sprite"></div>
+
+
+  <img src="./sprite.webp" alt="">
+</body>
+
+</html>

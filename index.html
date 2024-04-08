@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <div style="display: inline-block; width: 100px; height: 100px; background: pink;"></div>
-  <div style="display: inline-block; width: 100px; height: 100px; background: pink;"></div>
-  <div style="display: inline-block; width: 100px; height: 100px; background: pink;"></div>
-  <div style="display: inline-block; width: 100px; height: 100px; background: pink;"></div>
+<html>
+  <body>
+    <video id="myVideo" width="320" height="240" controls></video>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+      var hls = new Hls();
+      hls.loadSource('http://example.com/video.m3u8');
+      hls.attachMedia(document.getElementById('myVideo'));
 
-  <script>
-    const jsonp_017071984879741975 = function(data) {
-      console.log(13, data)
-    }
-  </script>
-  <script src="https://iv.jd.com/slide/g.html?appId=1604ebb2287&scene=login&product=click-bind-suspend&e=ALC6RUWIH36L6TO6DXQ4R7LA3VXP6ZYVRPHRVSSVT23AEX5L6U5MKYKEJVKITV3PLQMVLMRHS55VZTQ62LE5UF3VQU&lang=zh_CN&callback=jsonp_017071984879741975">
-    
-  </script>
-</body>
+      hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+        hls.config.xhrSetup = (xhr, url) => {
+          // 这一步必须 告诉hls重新发送ts请求
+          xhr.open("GET", url, true);
+          // header 添加参数
+          xhr.setRequestHeader("Access-Control-Allow-Origin", '*');
+          xhr.setRequestHeader("Access-Control-Allow-Methods", '*');
+        };
+      });
+
+      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        video.play();
+      });
+    </script>
+  </body>
 </html>

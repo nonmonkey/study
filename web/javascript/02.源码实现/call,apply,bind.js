@@ -13,7 +13,7 @@ Function.prototype.myCall = function (context) {
 };
 
 //与call的区别是，第二个第二个参数传入的是数组
-Function.prototype.apply() = function (context) {
+Function.prototype.myApply = function (context) {
   if (typeof this !== 'function') {
     throw new TypeError('error');
   }

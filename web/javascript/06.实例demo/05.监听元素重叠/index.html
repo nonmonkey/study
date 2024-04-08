@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .item {
+        height: 200px;
+        background-color: aliceblue;
+        margin: 10px 0;
+      }
+      .loading {
+        height: 50px;
+        font-size: 18px;
+        line-height: 50px;
+        text-align: center;
+        background-color: aqua;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+
+    <div class="loading">loding...</div>
+
+    <script>
+      // 加载数据
+      var isLoading = false;
+      var laodingData = () => {
+        isLoading = true;
+        console.log('isLoading');
+        setTimeout(() => {
+          isLoading = false;
+          console.log('isDone');
+        }, 1000);
+      };
+      laodingData();
+
+      // 监听重叠
+      var callback = function (entries) {
+        var entry = entries[0];
+        if (entry.isIntersecting && !isLoading) {
+          laodingData();
+        }
+      };
+      var options = {
+        root: null, // 根 (root) 元素，为null时为浏览器的可视窗口
+        threshold: 0.1, // 取值为0 - 1，0.1表示重叠10%
+      };
+      var ob = new IntersectionObserver(callback, options);
+      var loading = document.querySelector('.loading');
+      ob.observe(loading);
+    </script>
+  </body>
+</html>

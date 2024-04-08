@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      font-size: 0;
+    }
+
+    .btn {
+      display: inline-block;
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      box-sizing: border-box;
+      width: 80px;
+      height: 30px;
+      text-align: center;
+      vertical-align: middle;
+      font-size: 20px;
+      line-height: 28px;
+      border: 1px solid #f1f1f1;
+      background-color: #a1a1a1;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #878787;
+    }
+
+    #box {
+      width: 60%;
+      min-width: 600px;
+      height: 400px;
+      margin: 20px auto 0;
+      overflow: scroll;
+      border: 2px solid #b9b9b9;
+      scroll-behavior: smooth; /* 平滑滚动 */
+    }
+
+    p {
+      height: 100px;
+      font-size: 12px;
+    }
+
+    p:not(:last-child) {
+      margin-bottom: 20px;
+    }
+
+    p:nth-child(odd) {
+      background-color: aliceblue;
+    }
+
+    p:nth-child(even) {
+      background-color: aqua;
+    }
+  </style>
+
+  <script>
+    var scrollToTop = function () {
+      const box = document.getElementById('box');
+      box.scrollTo(0, 0);
+    }
+  </script>
+</head>
+
+<body>
+  <div class="btn" onclick="scrollToTop()">click</div>
+
+  <div id="box">
+    <p>item 1</p>
+    <p>item 2</p>
+    <p>item 3</p>
+    <p>item 4</p>
+    <p>item 5</p>
+    <p>item 6</p>
+    <p>item 7</p>
+    <p>item 8</p>
+    <p>item 9</p>
+  </div>
+</body>
+
+</html>

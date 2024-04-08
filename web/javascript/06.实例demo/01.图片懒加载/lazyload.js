@@ -32,6 +32,7 @@ function initLazyImg(defaultSrc) {
    * 设置默认图片
    */
   function setDefault() {
+    if (!defaultSrc) return;
     for (let i = 0; i < imgs.length; i++) {
       imgs[i].src = defaultSrc;
     }

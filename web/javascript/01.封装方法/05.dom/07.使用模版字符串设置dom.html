@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .yyyy {
+      font-size: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="text" background="pink"></div>
+
+  <script>
+    function generateString(dom, args) {
+      var strs = args[0];
+      var values = Array.prototype.slice.call(args, 1);
+      var getValue = (v) => {
+        var result = typeof v === 'function' ? v(dom.attributes) : v;
+        console.log('resultresult:', result)
+        return result || ''
+      }
+      console.log('values:', values);
+      return strs.reduce((prev, cur, index) => {
+        return prev + cur + getValue(values[index]);
+      }, '');
+    }
+
+    HTMLElement.prototype.styles = function () {
+      const styles = generateString(this, arguments);
+      let curStyle = this.getAttribute('style');
+      if (curStyle) {
+        curStyle += styles;
+      } else {
+        curStyle = styles;
+      }
+      this.style = curStyle;
+      console.log('styles:', curStyle);
+      return this;
+    };
+
+    HTMLElement.prototype.props = function () {
+      const propString = generateString(this, arguments);
+      propString
+        .split(';')
+        .map((it) => {
+          const parts = it.trim().split(':');
+          const key = parts[0].trim();
+          let value = parts.slice(1).join(':').trim();
+          if (value.indexOf(';') === value.length - 1) {
+            value = value.substring(0, value.length - 1); // 去掉;
+          }
+          return [key, value];
+        })
+        .forEach(([k, v]) => {
+          if (!k) return;
+
+          if (k === 'class') {
+            this.classList.add(v);
+          } else if (/^data-[a-z][a-zA-Z0-9]*$/.test(k)) {
+            var _k = k.slice(k.indexOf('-') + 1);
+            this.dataset[_k] = v;
+          } else {
+            this[k] = v;
+          }
+        });
+
+      return this;
+    };
+
+    HTMLElement.prototype.content = function () {
+      const text = generateString(this, arguments);
+      this.textContent = text;
+      return this;
+    };
+
+    /** 测试 */
+    var div = document.getElementById('text');
+    const getColor = () => 'red';
+    const getTitle = () => 'text';
+    div.styles`
+      color:${getColor()};
+      width: 100px;
+      height: 100px;
+      background: ${(props) => {console.log('props', props);return props.background}};
+    `.props`
+      title: ${getTitle()};
+      data-abs: ssssssssss;
+      class: yyyy;
+    `.content`
+      this is text
+    `;
+  </script>
+</body>
+
+</html>
