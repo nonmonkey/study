@@ -1,29 +1,14 @@
 <template>
   <div id="app">
-          <el-upload
-            ref="upload"
-            class="upload-demo"
-            action=""
-            :on-remove="handleRemove"
-            :before-remove="beforeRemove"
-            :file-list="fileList"
-            :http-request="uploadFile"
-            :auto-upload="false"
-            :on-change="handleChange"
-            accept=".xml,.yaml"
-            :multiple="true"
-            >
-            <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-            <div slot="tip" class="el-upload__tip">支持hadoop、flink 配置文件的上传</div>
-          </el-upload>
-
-          <el-button @click="btn">负荷为华为</el-button>
+    <VerificationCode></VerificationCode>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import md5 from 'md5'
+import VerificationCode from 'vue-verify-pop'
+
 // 获取e-sign-with
 function getSignWith (time = new Date().getTime(), params) {
   let paramsStr = '&';
@@ -47,6 +32,7 @@ function setHeadersParam (config, key, value) {
 export default {
   name: 'App',
   components: {
+    VerificationCode
   },
   data() {
     return {

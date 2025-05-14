@@ -25,7 +25,7 @@
     </el-upload>
 
     <el-button @click="btn">
-      负荷为华为
+      负荷为华为 {{ num }},{{ title }}
     </el-button>
   </div>
 </template>
@@ -33,8 +33,17 @@
 <script setup>
 /* eslint-disable max-len */
 import axios from 'axios';
-import { ref } from 'vue';
+import { ref, toRefs } from 'vue';
 import md5 from 'md5';
+
+const props = defineProps({
+  num: { type: [Number] },
+  title: { type: [String] }
+});
+
+const { num, title } = toRefs(props);
+
+const emit = defineEmits(['testEvent']);
 
 // 获取e-sign-with
 function getSignWith (time = new Date().getTime(), params) {
@@ -109,7 +118,9 @@ const uploadFile = (param) => {
 };
 
 const btn = () => {
-  uploadRef.value.submit();
+  // uploadRef.value.submit();
+  emit('testEvent', '123123');
+  console.log('11');
 };
 </script>
 

@@ -1,26 +1,50 @@
 <!DOCTYPE html>
 <html>
-  <body>
-    <video id="myVideo" width="320" height="240" controls></video>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script>
-      var hls = new Hls();
-      hls.loadSource('http://example.com/video.m3u8');
-      hls.attachMedia(document.getElementById('myVideo'));
+<head>
+<style>
+/* 方法1：clip-path + border-radius */
+.trapezoid-1 {
+    width: 200px;
+    height: 100px;
+    background: #3498db;
+    border-radius: 15px;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);
+    margin: 30px auto;
+}
 
-      hls.on(Hls.Events.MEDIA_ATTACHED, () => {
-        hls.config.xhrSetup = (xhr, url) => {
-          // 这一步必须 告诉hls重新发送ts请求
-          xhr.open("GET", url, true);
-          // header 添加参数
-          xhr.setRequestHeader("Access-Control-Allow-Origin", '*');
-          xhr.setRequestHeader("Access-Control-Allow-Methods", '*');
-        };
-      });
+/* 方法2：伪元素+倾斜变换 */
+.trapezoid-2 {
+    position: relative;
+    width: 200px;
+    height: 100px;
+    margin: 30px auto;
+    overflow: hidden;
+}
 
-      hls.on(Hls.Events.MANIFEST_PARSED, function () {
-        video.play();
-      });
-    </script>
-  </body>
+.trapezoid-2::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -15%;
+    width: 130%;
+    height: 100%;
+    background: #e74c3c;
+    transform: perspective(100px) rotateX(20deg);
+    border-radius: 15px;
+}
+
+/* 方法3：SVG背景 */
+.trapezoid-3 {
+    width: 200px;
+    height: 100px;
+    margin: 30px auto;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100"><path d="M30,10 L170,10 L190,90 L10,90 Z" rx="15" ry="15" fill="%232ecc71"/></svg>');
+}
+</style>
+</head>
+<body>
+    <div class="trapezoid-1"></div>
+    <div class="trapezoid-2"></div>
+    <div class="trapezoid-3"></div>
+</body>
 </html>

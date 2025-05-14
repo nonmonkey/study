@@ -1,17 +1,26 @@
-<script>
-import { h, ref } from 'vue';
+<template>
+  <div>
+    <div>{{ num }}</div>
+    <div>{{ title }}</div>
+    <div @click="onClick">qqqq</div>
+  </div>
+</template>
 
-export default {
-  name: 'Test',
-  setup() {
-    const key = ref('123');
-    const changeKey = (v) => {
-      key.value = v
-    }
-
-    return () => {
-      return h('h1', ['this is test!', key.value])
-    }
-  }
+<script setup lang="ts">
+defineProps({
+  num: {
+    type: [Number]
+  },
+  title: {
+    type: [String]
+  },
+})
+const emit = defineEmits(['testEvent'])
+const onClick= () => {
+  emit('testEvent', '09999')
 }
 </script>
+
+<style >
+
+</style>

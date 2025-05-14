@@ -11,11 +11,18 @@ provide('key', '123')
 var tmp = ref();
 var num = 0;
 var onClick = () => { tmp.value.changeKey(++num); }
+var onTestEvent = (ss) => {console.log(ss, '--------') }
+
+const testProps= {
+  onTestEvent,
+  num,
+  title: 'tsss'
+}
 </script>
 
 <template>
   <TmpView ref="tmp"></TmpView>
-  <Test @click="onClick"></Test>
+  <Test {...testProps} @click="onClick"></Test>
   <img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Hello Vue 3 + Vite"></HelloWorld>
 </template>

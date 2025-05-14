@@ -23,11 +23,13 @@ export default function App() {
     return arg + 10;
   });
 
+  console.log('1111111', 'App');
+
   return (
     <div>
       <button
         onClick={() => {
-          dispatch({ type: 'decrease' });
+          dispatch({ type: 'decrease', payload: 3 });
         }}
       >
         -
@@ -35,7 +37,7 @@ export default function App() {
       <span>{n}</span>
       <button
         onClick={() => {
-          dispatch({ type: 'increase' });
+          dispatch({ type: 'increase', payload: 5  });
         }}
       >
         +

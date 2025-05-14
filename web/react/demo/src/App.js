@@ -1,4 +1,4 @@
-import Test from './learn/16.Router/04.授权页面/App.js';
+import Test from './Test.js';
 
 export default function App() {
   return (

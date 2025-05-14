@@ -1,11 +1,7 @@
-function delay(ms: number): Promise<void> {
-  return new Promise<void>(resolve => setTimeout(resolve, ms));
+function f(x: number, y?: number) {
+  return x + (y || 0);
 }
-
-async function hello() {
-  console.log('Hello');
-  await delay(1000);
-  console.log('World!');
-}
-
-hello();
+f(1, 2);
+f(1);
+f(1, undefined);
+f(1, null); // error, 'null' is not assignable to 'number | undefined'
