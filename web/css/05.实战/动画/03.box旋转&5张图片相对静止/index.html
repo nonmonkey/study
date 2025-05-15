@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .box {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3 1fr);
+      grid-template-rows: repeat(3 1fr);
+      grid-template-areas: 
+        "item1 item1 item2"
+        "item3 item5 item2"
+        "item3 item4 item4";
+      margin: 100px auto 0;
+      width: 310px;
+      height: 310px;
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .item1 {
+      grid-area: item1;
+    }
+    .item2 {
+      grid-area: item2;
+    }
+    .item3 {
+      grid-area: item3;
+    }
+    .item4 {
+      grid-area: item4;
+    }
+    .item5 {
+      grid-area: item5;
+    }
+
+    .img {
+      width: 250%;
+      height: 250%;
+      object-fit: cover;
+      animation: rotate 10s linear infinite reverse;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="item item1">
+      <img class="img" src="./assets/img-1.jpeg" alt="">
+    </div>
+    <div class="item item2">
+      <img class="img" src="./assets/img-2.jpeg" alt="">
+    </div>
+    <div class="item item3">
+      <img class="img" src="./assets/img-3.jpeg" alt="">
+    </div>
+    <div class="item item4">
+      <img class="img" src="./assets/img-4.jpeg" alt="">
+    </div>
+    <div class="item item5">
+      <img class="img" src="./assets/img-5.jpeg" alt="">
+    </div>
+  </div>
+</body>
+</html>

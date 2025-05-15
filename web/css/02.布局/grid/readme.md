@@ -81,6 +81,7 @@ place-content: 属性是align-content属性和justify-content属性的合并简�
   grid-row-gap: 20px;
   grid-column-gap: 20px;
 }
+
 /* 等价于 */
 .container {
   grid-gap: 20px 20px;
