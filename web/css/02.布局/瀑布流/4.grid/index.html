@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    .waterfall {
+      width: 800px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .item {
+      background: rgb(200, 195, 191);
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+  const gridAutoRows = 10;
+  const columnGap = 10;
+  const rowGap = 20;
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.waterfall');
+    const items = document.querySelectorAll('.item');
+
+    // 容器样式
+    container.style.gridAutoRows = `${gridAutoRows}px`;
+    container.style.columnGap = `${columnGap}px`;
+
+    // 计算每个项目的位置
+    const columnSpans = new Array(3).fill(0); // 假设3列
+
+    items.forEach(item => {
+      // 找到最短的列
+      const minSpan = Math.min(...columnSpans);
+      const columnIndex = columnSpans.indexOf(minSpan);
+      const span = Math.ceil(item.offsetHeight / gridAutoRows);
+      const rowGapSpan = Math.ceil(rowGap / gridAutoRows)
+
+      // 设置项目位置
+      item.style.gridColumn = `${columnIndex + 1} / ${columnIndex + 2}`;
+      item.style.gridRow = `${minSpan + 1} / span ${span}`;
+
+      // 更新列高
+      columnSpans[columnIndex] += span + rowGapSpan;
+    });
+  });
+  </script>
+<div class="waterfall">
+  <div class="item item1" style="height: 200px;">1</div>
+  <div class="item item2" style="height: 350px;">2</div>
+  <div class="item item3" style="height: 550px;">3</div>
+  <div class="item item4" style="height: 650px;">4</div>
+  <div class="item item5" style="height: 150px;">5</div>
+  <div class="item item6" style="height: 250px;">6</div>
+  <div class="item item7" style="height: 350px;">7</div>
+  <div class="item item8" style="height: 350px;">8</div>
+  <!-- 更多项目 -->
+</div>
+</body>
+
+</html>
